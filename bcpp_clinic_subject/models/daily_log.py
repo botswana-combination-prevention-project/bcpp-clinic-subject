@@ -53,5 +53,4 @@ class DailyLog(BaseUuidModel):
         return self.report_date.strftime('%Y-%m-%d')
 
     class Meta:
-        app_label = 'clinic_subject'
         unique_together = ['report_date', 'hostname_created']

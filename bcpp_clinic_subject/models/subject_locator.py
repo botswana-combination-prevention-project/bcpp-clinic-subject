@@ -77,6 +77,5 @@ class SubjectLocator(LocatorModelMixin, RequiresConsentMixin, BaseUuidModel):
         return self.clinic_visit
 
     class Meta:
-        app_label = 'clinic_subject'
         verbose_name = "Clinic Subject Locator"
         verbose_name_plural = "Clinic Subject Locator"

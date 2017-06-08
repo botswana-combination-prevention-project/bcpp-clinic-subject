@@ -5,7 +5,7 @@ class AdminSite(DjangoAdminSite):
     site_title = 'BCPP Clinic Subject'
     site_header = 'BCPP Clinic Subject'
     index_title = 'BCPP Clinic Subject'
-    site_url = '/clinic_subject/list/'
+    site_url = '/bcpp_clinic_subject/list/'
 
 
-clinic_subject_admin = AdminSite(name='clinic_subject_admin')
+bcpp_clinic_subject_admin = AdminSite(name='bcpp_clinic_subject_admin')

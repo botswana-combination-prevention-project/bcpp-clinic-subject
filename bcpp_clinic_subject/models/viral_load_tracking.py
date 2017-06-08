@@ -1,9 +1,8 @@
 from django.db import models
 
-from edc_constants.choices import YES_NO
-
-from edc_lab.choices import REASON_NOT_DRAWN
 from edc_base.model_fields.custom_fields import InitialsField
+from edc_constants.choices import YES_NO
+from edc_lab.choices import REASON_NOT_DRAWN
 
 from .crf_model_mixin import CrfModelMixin
 
@@ -41,6 +40,5 @@ class ViralLoadTracking(CrfModelMixin):
     )
 
     class Meta(CrfModelMixin.Meta):
-        app_label = 'clinic_subject'
         verbose_name = 'Viral Load Tracking'
         verbose_name_plural = 'Viral Load Tracking'

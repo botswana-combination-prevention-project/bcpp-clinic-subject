@@ -16,7 +16,8 @@ from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
 from edc_search.model_mixins import SearchSlugModelMixin
 
-from clinic_screening.models import ClinicEligibility
+# FIXME: circular!!
+# from clinic_screening.models import ClinicEligibility
 
 
 class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
@@ -28,8 +29,8 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
     """ A model completed by the user that captures the ICF.
     """
 
-    clinic_eligibility = models.ForeignKey(
-        ClinicEligibility, on_delete=models.PROTECT)
+#     clinic_eligibility = models.ForeignKey(
+#         ClinicEligibility, on_delete=models.PROTECT)
 
     is_minor = models.CharField(
         verbose_name=("Is subject a minor?"),
@@ -76,7 +77,6 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
             self.version)
 
     class Meta(ConsentModelMixin.Meta):
-        app_label = 'clinic_subject'
         verbose_name = 'Clinic Consent RBD'
         verbose_name_plural = 'Clinic Consent RBD'
         ordering = ('-created', )

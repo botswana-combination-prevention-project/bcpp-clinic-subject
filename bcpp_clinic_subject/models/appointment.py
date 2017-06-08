@@ -11,4 +11,4 @@ class Appointment(AppointmentModelMixin, BaseUuidModel):
     history = HistoricalRecords()
 
     class Meta(AppointmentModelMixin.Meta):
-        app_label = 'clinic_subject'
+        pass

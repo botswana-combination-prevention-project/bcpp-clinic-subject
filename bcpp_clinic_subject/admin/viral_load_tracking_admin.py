@@ -1,12 +1,12 @@
 from django.contrib import admin
 
 from ..admin import CrfModelAdminMixin
-from ..admin_site import clinic_subject_admin
+from ..admin_site import bcpp_clinic_subject_admin
 from ..forms import ViralLoadTrackingForm
 from ..models import ViralLoadTracking
 
 
-@admin.register(ViralLoadTracking, site=clinic_subject_admin)
+@admin.register(ViralLoadTracking, site=bcpp_clinic_subject_admin)
 class ViralLoadTrackingAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = ViralLoadTrackingForm

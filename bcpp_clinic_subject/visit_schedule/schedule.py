@@ -9,8 +9,8 @@ from ..visit_schedule import crfs
 schedule = Schedule(
     name='schedule1',
     title='CLINIC',
-    enrollment_model='clinic_subject.enrollment',
-    disenrollment_model='clinic_subject.disenrollment',)
+    enrollment_model='bcpp_clinic_subject.enrollment',
+    disenrollment_model='bcpp_clinic_subject.disenrollment',)
 
 schedule.add_visit(
     code='C1',

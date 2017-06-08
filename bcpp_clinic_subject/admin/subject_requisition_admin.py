@@ -1,20 +1,16 @@
 from django.contrib import admin
 
 from edc_base.modeladmin_mixins import audit_fieldset_tuple
-from edc_lab.admin import (
-    RequisitionAdminMixin,
-    requisition_fieldset,
-    requisition_status_fieldset,
-    requisition_identifier_fieldset,
-    requisition_identifier_fields)
+from edc_lab.admin import RequisitionAdminMixin, requisition_fieldset, requisition_status_fieldset
+from edc_lab.admin import requisition_identifier_fieldset, requisition_identifier_fields
 
 from ..admin import CrfModelAdminMixin
-from ..admin_site import clinic_subject_admin
+from ..admin_site import bcpp_clinic_subject_admin
 from ..forms import SubjectRequisitionForm
 from ..models import SubjectRequisition
 
 
-@admin.register(SubjectRequisition, site=clinic_subject_admin)
+@admin.register(SubjectRequisition, site=bcpp_clinic_subject_admin)
 class SubjectRequisitionAdmin(CrfModelAdminMixin,
                               RequisitionAdminMixin,
                               admin.ModelAdmin):

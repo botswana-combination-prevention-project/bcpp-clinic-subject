@@ -1,12 +1,12 @@
 from django.contrib import admin
 
 from ..admin import ModelAdminMixin
-from ..admin_site import clinic_subject_admin
+from ..admin_site import bcpp_clinic_subject_admin
 from ..forms import DailyLogForm
 from ..models import DailyLog
 
 
-@admin.register(DailyLog, site=clinic_subject_admin)
+@admin.register(DailyLog, site=bcpp_clinic_subject_admin)
 class DailyLogAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = DailyLogForm

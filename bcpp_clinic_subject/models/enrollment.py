@@ -12,7 +12,7 @@ class Enrollment(EnrollmentModelMixin, CreateAppointmentsMixin, BaseUuidModel):
     Clinic Consents.
     """
 
-    ADMIN_SITE_NAME = 'clinic_subject_admin'
+    ADMIN_SITE_NAME = 'bcpp_clinic_subject_admin'
 
     subject_identifier = models.CharField(
         verbose_name="Subject Identifier",
@@ -26,6 +26,6 @@ class Enrollment(EnrollmentModelMixin, CreateAppointmentsMixin, BaseUuidModel):
 
     class Meta:
         visit_schedule_name = 'clinic_visit_schedule.schedule1'
-        consent_model = 'clinic_subject.subjectconsent'
+        consent_model = 'bcpp_clinic_subject.subjectconsent'
         verbose_name = 'Enrollment Clinic'
         verbose_name_plural = 'Enrollment Clinic'

@@ -80,6 +80,5 @@ class VlResult(CrfModelMixin):
     history = HistoricalRecords()
 
     class Meta(CrfModelMixin.Meta):
-        app_label = "clinic_subject"
         verbose_name = "Clinic VL Result"
         verbose_name_plural = "Clinic VL Result"

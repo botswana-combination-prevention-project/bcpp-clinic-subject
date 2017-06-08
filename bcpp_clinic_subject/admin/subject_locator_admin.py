@@ -2,13 +2,13 @@ from django.contrib import admin
 
 from edc_base.fieldsets import FieldsetsModelAdminMixin
 
-from .model_admin_mixin import ModelAdminMixin
-from ..admin_site import clinic_subject_admin
+from ..admin_site import bcpp_clinic_subject_admin
 from ..forms import SubjectLocatorForm
 from ..models import SubjectLocator
+from .model_admin_mixin import ModelAdminMixin
 
 
-@admin.register(SubjectLocator, site=clinic_subject_admin)
+@admin.register(SubjectLocator, site=bcpp_clinic_subject_admin)
 class SubjectLocatorAdmin(ModelAdminMixin, FieldsetsModelAdminMixin,
                           admin.ModelAdmin):
 

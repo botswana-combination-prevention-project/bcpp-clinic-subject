@@ -5,8 +5,7 @@ from django.urls.exceptions import NoReverseMatch
 from edc_base.modeladmin_mixins.model_admin_redirect_on_delete_mixin import ModelAdminRedirectOnDeleteMixin
 from edc_base.fieldsets.fieldsets_modeladmin_mixin import FieldsetsModelAdminMixin
 from edc_base.modeladmin_mixins.form_as_json_model_admin_mixin import FormAsJSONModelAdminMixin
-from edc_visit_tracking.modeladmin_mixins import (
-    CrfModelAdminMixin as VisitTrackingCrfModelAdminMixin)
+from edc_visit_tracking.modeladmin_mixins import CrfModelAdminMixin as VisitTrackingCrfModelAdminMixin
 
 from edc_base.modeladmin_mixins import (
     ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructionsMixin,
@@ -32,7 +31,7 @@ class CrfModelAdminMixin(VisitTrackingCrfModelAdminMixin,
                          FormAsJSONModelAdminMixin,
                          admin.ModelAdmin):
 
-    post_url_on_delete_name = 'clinic_subject:dashboard_url'
+    post_url_on_delete_name = 'bcpp_clinic_subject:dashboard_url'
     instructions = (
         'Please complete the questions below. Required questions are in bold. '
         'When all required questions are complete click SAVE. '
@@ -56,7 +55,7 @@ class CrfModelAdminMixin(VisitTrackingCrfModelAdminMixin,
         household_member = obj.clinic_visit.household_member
         try:
             return reverse(
-                'clinic_subject:dashboard_url', kwargs=dict(
+                'bcpp_clinic_subject:dashboard_url', kwargs=dict(
                     subject_identifier=household_member.subject_identifier,
                     household_identifier=(household_member.household_structure.
                                           household.household_identifier),

@@ -11,18 +11,17 @@ https://docs.djangoproject.com/en/1.9/ref/settings/
 """
 import configparser
 import os
-from unipath import Path
 import sys
 
 from django.core.management.color import color_style
 from pathlib import PurePath
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = Path(os.path.dirname(os.path.realpath(__file__)))
+BASE_DIR = os.path.dirname(os.path.realpath(__file__))
 
 style = color_style()
 
-APP_NAME = 'clinic_subject'
+APP_NAME = 'bcpp_clinic_subject'
 
 # Quick-start development settings - unsuitable for production
 # See https://docs.djangoproject.com/en/1.9/howto/deployment/checklist/
@@ -56,24 +55,31 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'tz_detect',
-    'rest_framework',
-    'rest_framework.authtoken',
     'django_crypto_fields.apps.AppConfig',
     'django_revision.apps.AppConfig',
-    'edc_dashboard.apps.AppConfig',
+    'edc_appointment.apps.AppConfig',
     'edc_consent.apps.AppConfig',
-    'bcpp_clinic.apps.EdcBaseAppConfig',
+    'edc_search.apps.AppConfig',
+    'edc_locator.apps.AppConfig',
+    'edc_lab.apps.AppConfig',
     'edc_registration.apps.AppConfig',
     'edc_visit_schedule.apps.AppConfig',
-    'bcpp_clinic.apps.EdcIdentifierAppConfig',
-    'bcpp_clinic.apps.EdcDeviceAppConfig',
-    'bcpp_clinic.apps.EdcProtocolAppConfig',
-    'bcpp_clinic.apps.EdcLabAppConfig',
-    'bcpp_clinic.apps.EdcMetadataAppConfig',
-    'bcpp_clinic.apps.EdcVisitTrackingAppConfig',
-    'bcpp_clinic.apps.EdcTimepointAppConfig',
-    'bcpp_clinic.apps.EdcAppointmentAppConfig',
-    'clinic_subject.apps.AppConfig',
+    'edc_identifier.apps.AppConfig',
+    'edc_protocol.apps.AppConfig',
+    'edc_device.apps.AppConfig',
+    'edc_timepoint.apps.AppConfig',
+    'edc_metadata.apps.AppConfig',
+    'edc_visit_tracking.apps.AppConfig',
+    'edc_offstudy.apps.AppConfig',
+    # 'bcpp_clinic.apps.EdcIdentifierAppConfig',
+    #     'bcpp_clinic.apps.EdcDeviceAppConfig',
+    #     'bcpp_clinic.apps.EdcProtocolAppConfig',
+    #     'bcpp_clinic.apps.EdcLabAppConfig',
+    #     'bcpp_clinic.apps.EdcMetadataAppConfig',
+    #     'bcpp_clinic.apps.EdcVisitTrackingAppConfig',
+    #     'bcpp_clinic.apps.EdcTimepointAppConfig',
+    #     'bcpp_clinic.apps.EdcAppointmentAppConfig',
+    'bcpp_clinic_subject.apps.AppConfig',
 ]
 
 
@@ -105,7 +111,7 @@ MIDDLEWARE_CLASSES = [
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
 ]
 
-ROOT_URLCONF = 'clinic_subject.urls'
+ROOT_URLCONF = 'bcpp_clinic_subject.urls'
 
 TEMPLATES = [
     {
@@ -123,7 +129,7 @@ TEMPLATES = [
     },
 ]
 
-WSGI_APPLICATION = 'clinic_subject.wsgi.application'
+WSGI_APPLICATION = 'bcpp_clinic_subject.wsgi.application'
 
 
 # Database
@@ -177,9 +183,9 @@ MEDIA_ROOT = os.path.join(BASE_DIR, APP_NAME, 'media')
 
 MEDIA_URL = '/media/'
 
-GIT_DIR = BASE_DIR.ancestor(1)
+GIT_DIR = BASE_DIR
 
-KEY_PATH = '/Volumes/crypto_keys'
+KEY_PATH = os.path.join(str(PurePath(BASE_DIR).parent), 'crypto_fields')
 
 CURRENT_MAP_AREA = 'test_community'
 DEVICE_ID = '21'

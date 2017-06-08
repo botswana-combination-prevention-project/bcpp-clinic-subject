@@ -1,12 +1,12 @@
 from django.contrib import admin
 
 from ..admin import CrfModelAdminMixin
-from ..admin_site import clinic_subject_admin
+from ..admin_site import bcpp_clinic_subject_admin
 from ..forms import QuestionnaireForm
 from ..models import Questionnaire
 
 
-@admin.register(Questionnaire, site=clinic_subject_admin)
+@admin.register(Questionnaire, site=bcpp_clinic_subject_admin)
 class QuestionnaireAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = QuestionnaireForm

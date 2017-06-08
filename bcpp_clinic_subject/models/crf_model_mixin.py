@@ -41,5 +41,5 @@ class CrfModelMixin(VisitTrackingCrfModelMixin, OffstudyMixin,
     history = HistoricalRecords()
 
     class Meta(VisitTrackingCrfModelMixin.Meta, BaseRequiresConsentMixin.Meta):
-        consent_model = 'bcpp_clinic.subjectconsent'
+        consent_model = 'bcpp_clinic_subject.subjectconsent'
         abstract = True

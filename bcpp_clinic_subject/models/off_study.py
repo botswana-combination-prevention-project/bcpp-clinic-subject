@@ -10,6 +10,5 @@ class OffStudy(OffstudyModelMixin, BaseUuidModel):
     history = HistoricalRecords()
 
     class Meta:
-        app_label = "clinic_subject"
         verbose_name = "Clinic Off Study"
         verbose_name_plural = "Clinic Off Study"

@@ -42,5 +42,4 @@ class SubjectRequisition(
                 + self.subject_visit.household_member.get_slugs())
 
     class Meta(VisitTrackingCrfModelMixin.Meta, RequiresConsentMixin.Meta):
-        consent_model = 'clinic_subject.subjectconsent'
-        app_label = 'bcpp_clinic'
+        consent_model = 'bcpp_clinic_subject.subjectconsent'

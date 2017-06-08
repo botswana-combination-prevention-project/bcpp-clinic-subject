@@ -45,6 +45,5 @@ class Questionnaire(CrfModelMixin):
     )
 
     class Meta(CrfModelMixin.Meta):
-        app_label = 'clinic_subject'
         verbose_name = "Questionnaire"
         verbose_name_plural = "Questionnaire"

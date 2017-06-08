@@ -4,7 +4,7 @@ from edc_lab.site_labs import site_labs
 from .constants import RESEARCH_BLOOD_DRAW, VIRAL_LOAD
 
 
-lab_profile = LabProfile('clinic_subject')
+lab_profile = LabProfile('bcpp_clinic_subject')
 
 pl = AliquotType('Plasma', 'PL', '36')
 lab_profile.add_aliquot_type(pl)
@@ -33,4 +33,4 @@ rdb_panel.processing_profile = rdb_processing_profile
 lab_profile.add_processing_profile(rdb_processing_profile)
 lab_profile.add_panel(rdb_panel)
 
-site_labs.register('clinic_subject.subjectrequisition', lab_profile)
+site_labs.register('bcpp_clinic_subject.subjectrequisition', lab_profile)
