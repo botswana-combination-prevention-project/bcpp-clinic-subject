@@ -1,4 +1,4 @@
-from edc_lab import AliquotType, LabProfile, ProcessingProfile, RequisitionPanel
+from edc_lab import AliquotType, LabProfile, ProcessingProfile, RequisitionPanel, Process
 from edc_lab.site_labs import site_labs
 
 from .constants import RESEARCH_BLOOD_DRAW, VIRAL_LOAD
@@ -6,31 +6,43 @@ from .constants import RESEARCH_BLOOD_DRAW, VIRAL_LOAD
 
 lab_profile = LabProfile('bcpp_clinic_subject')
 
-pl = AliquotType('Plasma', 'PL', '36')
-lab_profile.add_aliquot_type(pl)
+wb = AliquotType(name='Whole Blood', alpha_code='WB', numeric_code='02')
+bc = AliquotType(name='Buffy Coat', alpha_code='BC', numeric_code='16')
+pl = AliquotType(name='Plasma', alpha_code='PL', numeric_code='32')
+wb.add_derivatives(pl, bc)
 
-bc = AliquotType('Buffy Coat', 'BC', '12')
-lab_profile.add_aliquot_type(bc)
 
-wb = AliquotType('Whole Blood', 'WB', '02')
-wb.add_derivative(bc)
-wb.add_derivative(pl)
-lab_profile.add_aliquot_type(wb)
+processing_profile = ProcessingProfile(name='viral_load', aliquot_type=wb)
+process_vl_bc = Process(aliquot_type=bc, aliquot_count=2)
+process_vl_pl = Process(aliquot_type=pl, aliquot_count=3)
+processing_profile.add_processes(process_vl_bc, process_vl_pl)
 
-viral_load_panel = RequisitionPanel(VIRAL_LOAD, wb, abbreviation='VL')
-viral_load_processing = ProcessingProfile('viral_load', wb)
-viral_load_processing.add_process(pl, 3)
-viral_load_processing.add_process(bc, 2)
-viral_load_panel.processing_profile = viral_load_processing
-lab_profile.add_processing_profile(viral_load_processing)
-lab_profile.add_panel(viral_load_panel)
+processing_profile = ProcessingProfile(name='rbd', aliquot_type=wb)
+process_rbd_bc = Process(aliquot_type=bc, aliquot_count=2)
+process_rbd_pl = Process(aliquot_type=pl, aliquot_count=4)
+processing_profile.add_processes(process_rbd_bc, process_rbd_pl)
 
-rdb_panel = RequisitionPanel(RESEARCH_BLOOD_DRAW, wb, abbreviation='RBD')
-rdb_processing_profile = ProcessingProfile('rbd', wb)
-rdb_processing_profile.add_process(pl, 4)
-rdb_processing_profile.add_process(bc, 2)
-rdb_panel.processing_profile = rdb_processing_profile
-lab_profile.add_processing_profile(rdb_processing_profile)
-lab_profile.add_panel(rdb_panel)
 
-site_labs.register('bcpp_clinic_subject.subjectrequisition', lab_profile)
+panel_vl = RequisitionPanel(
+    name=VIRAL_LOAD,
+    model='bcpp_subject_clinic.subjectrequisition',
+    aliquot_type=wb,
+    abbreviation='VL',
+    processing_profile=processing_profile)
+
+panel_rbd = RequisitionPanel(
+    name=RESEARCH_BLOOD_DRAW,
+    model='bcpp_subject_clinic.subjectrequisition',
+    aliquot_type=wb,
+    abbreviation='RBD',
+    processing_profile=processing_profile)
+
+
+lab_profile = LabProfile(
+    name='bcpp_clinic_subject',
+    requisition_model='bcpp_subject_clinic.subjectrequisition')
+lab_profile.add_panel(panel_vl)
+lab_profile.add_panel(panel_rbd)
+
+
+site_labs.register(lab_profile)
