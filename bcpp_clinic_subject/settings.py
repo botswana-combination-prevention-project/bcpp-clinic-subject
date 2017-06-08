@@ -70,14 +70,7 @@ INSTALLED_APPS = [
     'edc_timepoint.apps.AppConfig',
     'edc_metadata.apps.AppConfig',
     'edc_offstudy.apps.AppConfig',
-    # 'bcpp_clinic.apps.EdcIdentifierAppConfig',
-    #     'bcpp_clinic.apps.EdcDeviceAppConfig',
-    #     'bcpp_clinic.apps.EdcProtocolAppConfig',
-    #     'bcpp_clinic.apps.EdcLabAppConfig',
-    #     'bcpp_clinic.apps.EdcMetadataAppConfig',
     'bcpp_clinic_subject.apps.EdcVisitTrackingAppConfig',
-    #     'bcpp_clinic.apps.EdcTimepointAppConfig',
-    #     'bcpp_clinic.apps.EdcAppointmentAppConfig',
     'bcpp_clinic_subject.apps.AppConfig',
 ]
 
