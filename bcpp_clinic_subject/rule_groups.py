@@ -15,7 +15,7 @@ class InitiationRequisitionRuleGroup(RuleGroup):
 
     class Meta:
         app_label = 'bcpp_clinic'
-        source_fk = (ClinicVisit, 'clinic_visit')
+        source_fk = (ClinicVisit, 'subject_visit')
         source_model = Questionnaire
 site_rule_groups.register(InitiationRequisitionRuleGroup)
 
@@ -31,7 +31,7 @@ class MasaRuleGroup(RuleGroup):
 
     class Meta:
         app_label = 'bcpp_clinic'
-        source_fk = (ClinicVisit, 'clinic_visit')
+        source_fk = (ClinicVisit, 'subject_visit')
         source_model = Questionnaire
 site_rule_groups.register(MasaRuleGroup)
 
@@ -47,7 +47,7 @@ class ViralLoadTrackingRuleGroup(RuleGroup):
 
     class Meta:
         app_label = 'bcpp_clinic'
-        source_fk = (ClinicVisit, 'clinic_visit')
+        source_fk = (ClinicVisit, 'subject_visit')
         source_model = ViralLoadTracking
 site_rule_groups.register(ViralLoadTrackingRuleGroup)
 
@@ -64,6 +64,6 @@ class ViralLoadTrackingRequisitionRuleGroup(RuleGroup):
 
     class Meta:
         app_label = 'bcpp_clinic'
-        source_fk = (ClinicVisit, 'clinic_visit')
+        source_fk = (ClinicVisit, 'subject_visit')
         source_model = ViralLoadTracking
 site_rule_groups.register(ViralLoadTrackingRequisitionRuleGroup)

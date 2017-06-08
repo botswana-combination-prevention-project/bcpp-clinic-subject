@@ -74,7 +74,7 @@ class SubjectLocator(LocatorModelMixin, RequiresConsentMixin, BaseUuidModel):
     )
 
     def __str__(self):
-        return self.clinic_visit
+        return self.subject_visit
 
     class Meta:
         verbose_name = "Clinic Subject Locator"

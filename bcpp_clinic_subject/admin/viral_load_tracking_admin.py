@@ -10,13 +10,13 @@ from ..models import ViralLoadTracking
 class ViralLoadTrackingAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = ViralLoadTrackingForm
-    fields = ('clinic_visit',
+    fields = ('subject_visit',
               'report_datetime',
               'is_drawn',
               'reason_not_drawn',
               'drawn_datetime',
               'clinician_initials',)
-    list_display = ('clinic_visit', 'is_drawn',
+    list_display = ('subject_visit', 'is_drawn',
                     'reason_not_drawn', 'drawn_datetime')
     list_filter = ('is_drawn',)
     radio_fields = {}

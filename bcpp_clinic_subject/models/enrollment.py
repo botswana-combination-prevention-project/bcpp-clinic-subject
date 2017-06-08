@@ -25,7 +25,7 @@ class Enrollment(EnrollmentModelMixin, CreateAppointmentsMixin, BaseUuidModel):
         editable=False)
 
     class Meta:
-        visit_schedule_name = 'clinic_visit_schedule.schedule1'
+        visit_schedule_name = 'subject_visit_schedule.schedule1'
         consent_model = 'bcpp_clinic_subject.subjectconsent'
         verbose_name = 'Enrollment Clinic'
         verbose_name_plural = 'Enrollment Clinic'

@@ -24,7 +24,7 @@ class QuestionnaireAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         "knows_last_cd4": admin.VERTICAL,
     }
     list_display = (
-        'clinic_visit', 'registration_type', 'on_arv', 'cd4_count',
+        'subject_visit', 'registration_type', 'on_arv', 'cd4_count',
         'report_datetime')
     list_filter = ('on_arv', 'report_datetime')
     search_fields = ('on_arv',)

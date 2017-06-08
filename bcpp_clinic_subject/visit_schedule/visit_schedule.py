@@ -21,7 +21,7 @@ except AttributeError as e:
 
 
 visit_schedule = VisitSchedule(
-    name='clinic_visit_schedule',
+    name='subject_visit_schedule',
     verbose_name='BCPP Clinic Survey',
     app_label='bcpp_clinic',
     visit_model='bcpp_clinic.clinicvisit',

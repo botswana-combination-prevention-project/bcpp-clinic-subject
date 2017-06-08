@@ -1,21 +1,22 @@
-from datetime import date
+import arrow
 
 from django.db import models
+
 from edc_base.model_mixins.base_uuid_model import BaseUuidModel
+from edc_base.utils import get_utcnow
 
 
 class DailyLog(BaseUuidModel):
     """A model completed by the user daily to help measure the daily flow
-    of patients in the clinic."""
+    of patients in the clinic.
+    """
 
-    report_date = models.DateField(
-        default=date.today(),
-        # unique=True
-    )
+    report_datetime = models.DateTimeField(default=get_utcnow)
+
+    report_date = models.DateTimeField(editable=False, null=True)
 
     from_pharma = models.IntegerField(
-        verbose_name='Number of patients referred from pharmacy',
-    )
+        verbose_name='Number of patients referred from pharmacy')
 
     from_nurse_prescriber = models.IntegerField(
         verbose_name='Number of patients referred from nurse prescriber',
@@ -51,6 +52,11 @@ class DailyLog(BaseUuidModel):
 
     def __str__(self):
         return self.report_date.strftime('%Y-%m-%d')
+
+    def save(self, *args, **kwargs):
+        self.report_date = arrow.Arrow.from_datetime(
+            self.report_datetime).date()
+        super().save(*args, **kwargs)
 
     class Meta:
         unique_together = ['report_date', 'hostname_created']

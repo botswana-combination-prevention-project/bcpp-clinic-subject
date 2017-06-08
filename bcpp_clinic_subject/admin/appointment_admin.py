@@ -4,12 +4,10 @@ from edc_base.modeladmin_mixins import audit_fieldset_tuple
 from edc_visit_schedule.admin import (
     visit_schedule_fieldset_tuple, visit_schedule_fields)
 
-from .model_admin_mixin import ModelAdminMixin
-
-from ..models import Appointment
-
 from ..admin_site import bcpp_clinic_subject_admin
 from ..forms import AppointmentForm
+from ..models import Appointment
+from .model_admin_mixin import ModelAdminMixin
 
 
 @admin.register(Appointment, site=bcpp_clinic_subject_admin)

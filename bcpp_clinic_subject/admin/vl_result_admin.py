@@ -11,7 +11,7 @@ class ClinicVlResultAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = VlResultForm
     fields = (
-        'clinic_visit',
+        'subject_visit',
         'report_datetime',
         'site',
         'clinician_initials',
@@ -22,9 +22,9 @@ class ClinicVlResultAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         'validation_date',
         'validated_by')
 
-    list_display = ('clinic_visit', 'clinician_initials',
+    list_display = ('subject_visit', 'clinician_initials',
                     'collection_datetime', 'result_value', 'validated_by')
 
     search_fields = (
-        'clinic_visit__subject_identifier',
+        'subject_visit__subject_identifier',
         'clinician_initials', 'result_value',)
