@@ -1,15 +1,15 @@
 from django.contrib import admin
 
-from ..forms import ClinicVlResultForm
-from ..models import ClinicVlResult
-from ..admin_site import bcpp_subject_admin
+from ..forms import VlResultForm
+from ..models import VlResult
+from ..admin_site import clinic_subject_admin
 from ..admin import CrfModelAdminMixin
 
 
-@admin.register(ClinicVlResult, site=bcpp_subject_admin)
+@admin.register(VlResult, site=clinic_subject_admin)
 class ClinicVlResultAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
-    form = ClinicVlResultForm
+    form = VlResultForm
     fields = (
         'clinic_visit',
         'report_datetime',

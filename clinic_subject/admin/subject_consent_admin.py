@@ -5,18 +5,18 @@ from edc_base.modeladmin_mixins import ModelAdminInstitutionMixin
 from edc_base.modeladmin_mixins import ModelAdminNextUrlRedirectMixin
 from edc_consent.modeladmin_mixins import ModelAdminConsentMixin
 
-from ..admin_site import bcpp_subject_admin
-from ..forms import ClinicConsentForm
+from ..admin_site import clinic_subject_admin
+from ..forms import SubjectConsentForm
 from ..models import SubjectConsent
 
 
-@admin.register(SubjectConsent, site=bcpp_subject_admin)
+@admin.register(SubjectConsent, site=clinic_subject_admin)
 class SubjectConsentAdmin(ModelAdminConsentMixin, ModelAdminRevisionMixin,
                           ModelAdminInstitutionMixin,
                           ModelAdminNextUrlRedirectMixin, admin.ModelAdmin):
 
     dashboard_type = 'clinic'
-    form = ClinicConsentForm
+    form = SubjectConsentForm
 
     list_display = (
         'subject_identifier',

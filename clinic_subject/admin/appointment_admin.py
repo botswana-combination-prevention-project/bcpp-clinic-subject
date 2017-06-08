@@ -8,11 +8,11 @@ from .model_admin_mixin import ModelAdminMixin
 
 from ..models import Appointment
 
-from ..admin_site import bcpp_subject_admin
+from ..admin_site import clinic_subject_admin
 from ..forms import AppointmentForm
 
 
-@admin.register(Appointment, site=bcpp_subject_admin)
+@admin.register(Appointment, site=clinic_subject_admin)
 class AppointmentAdmin(ModelAdminMixin, admin.ModelAdmin):
 
     form = AppointmentForm

@@ -1,7 +1,5 @@
 from .subject_consent_admin import SubjectConsentAdmin
-from .clinic_eligibility_admin import ClinicEligibilityAdmin
-from .clinic_enrollment_loss_admin import ClinicEnrollmentLossAdmin
-from .clinic_subject_locator_admin import ClinicSubjectLocatorAdmin
+from .subject_locator_admin import SubjectLocatorAdmin
 from .subject_visit_admin import SubjectVisitAdmin
 from .model_admin_mixin import ModelAdminMixin, CrfModelAdminMixin
 from .daily_log_admin import DailyLogAdmin

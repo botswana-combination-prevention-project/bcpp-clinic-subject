@@ -9,12 +9,12 @@ from edc_lab.admin import (
     requisition_identifier_fields)
 
 from ..admin import CrfModelAdminMixin
-from ..admin_site import bcpp_subject_admin
+from ..admin_site import clinic_subject_admin
 from ..forms import SubjectRequisitionForm
 from ..models import SubjectRequisition
 
 
-@admin.register(SubjectRequisition, site=bcpp_subject_admin)
+@admin.register(SubjectRequisition, site=clinic_subject_admin)
 class SubjectRequisitionAdmin(CrfModelAdminMixin,
                               RequisitionAdminMixin,
                               admin.ModelAdmin):

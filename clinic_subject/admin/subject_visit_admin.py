@@ -4,14 +4,14 @@ from django.contrib import admin
 from edc_visit_tracking.modeladmin_mixins import VisitModelAdminMixin
 
 from .model_admin_mixin import ModelAdminMixin
-from ..admin_site import bcpp_subject_admin
+from ..admin_site import clinic_subject_admin
 from ..forms import SubjectVisitForm
 from ..models import SubjectRequisition
 from ..models import SubjectVisit
 
 
-@admin.register(SubjectVisit, site=bcpp_subject_admin)
-class ClinicVisitAdmin(VisitModelAdminMixin, ModelAdminMixin, admin.ModelAdmin):
+@admin.register(SubjectVisit, site=clinic_subject_admin)
+class SubjectVisitAdmin(VisitModelAdminMixin, ModelAdminMixin, admin.ModelAdmin):
 
     form = SubjectVisitForm
 
