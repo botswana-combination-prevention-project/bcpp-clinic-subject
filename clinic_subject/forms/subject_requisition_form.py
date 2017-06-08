@@ -1,7 +1,7 @@
 from edc_lab.forms import RequisitionFormMixin
 
 from ..models import SubjectRequisition
-from .model_form_mixin import SubjectModelFormMixin
+from .modelform_mixin import SubjectModelFormMixin
 
 
 class SubjectRequisitionForm(RequisitionFormMixin, SubjectModelFormMixin):
