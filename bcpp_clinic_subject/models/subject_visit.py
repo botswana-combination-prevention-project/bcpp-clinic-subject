@@ -1,13 +1,15 @@
 from django.db import models
 
 from edc_appointment.models import Appointment
+from edc_base.model_managers.historical_records import HistoricalRecords
 from edc_base.model_mixins.base_uuid_model import BaseUuidModel
 from edc_consent.model_mixins import RequiresConsentMixin
 from edc_metadata.model_mixins.creates.creates_metadata_model_mixin import CreatesMetadataModelMixin
+from edc_offstudy.model_mixins import OffstudyMixin
+from edc_visit_tracking.managers import VisitModelManager
 from edc_visit_tracking.model_mixins.visit_model_mixin import VisitModelMixin
 
 from ..choices import VISIT_UNSCHEDULED_REASON
-from edc_offstudy.model_mixins import OffstudyMixin
 
 
 class SubjectVisit(VisitModelMixin, OffstudyMixin, CreatesMetadataModelMixin,
@@ -29,6 +31,10 @@ class SubjectVisit(VisitModelMixin, OffstudyMixin, CreatesMetadataModelMixin,
         null=True,
         choices=VISIT_UNSCHEDULED_REASON,
     )
+
+    objects = VisitModelManager()
+
+    history = HistoricalRecords()
 
     def save(self, *args, **kwargs):
         self.info_source = 'subject'
