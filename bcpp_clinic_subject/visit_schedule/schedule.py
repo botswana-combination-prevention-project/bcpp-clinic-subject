@@ -1,22 +1,26 @@
-from edc_visit_schedule.constants import YEARS
-from edc_visit_schedule.schedule import Schedule
+from dateutil.relativedelta import relativedelta
+
+from edc_visit_schedule import Schedule, Visit
 
 from .requisitions import requisitions
 
 from ..visit_schedule import crfs
 
 
-schedule = Schedule(
+schedule1 = Schedule(
     name='schedule1',
-    title='CLINIC',
+    title='Bcpp Clinic',
     enrollment_model='bcpp_clinic_subject.enrollment',
     disenrollment_model='bcpp_clinic_subject.disenrollment',)
 
-schedule.add_visit(
+visit0 = Visit(
     code='C1',
     title='Clinic Subject Survey',
-    timepoint=1,
-    base_interval=1,
-    base_interval_unit=YEARS,
+    timepoint=0,
+    rbase=relativedelta(years=0),
+    rlower=relativedelta(years=0),
+    rupper=relativedelta(years=1),
     requisitions=requisitions,
     crfs=crfs)
+
+schedule1.add_visit(visit=visit0)

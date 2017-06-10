@@ -12,5 +12,5 @@ class Disenrollment(DisenrollmentModelMixin, RequiresConsentMixin, BaseUuidModel
     objects = DisenrollmentManager()
 
     class Meta(DisenrollmentModelMixin.Meta):
-        visit_schedule_name = 'subject_visit_schedule.schedule1'
+        visit_schedule_name = 'visit_schedule1.schedule1'
         consent_model = 'bcpp_clinic_subject.subjectconsent'
