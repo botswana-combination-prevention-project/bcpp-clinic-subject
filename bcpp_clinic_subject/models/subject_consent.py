@@ -26,6 +26,13 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
     """ A model completed by the user that captures the ICF.
     """
 
+    eligibility_identifier = models.CharField(
+        verbose_name='Eligibility Identifier',
+        max_length=50,
+        blank=True,
+        unique=True,
+        editable=False)
+
     is_minor = models.CharField(
         verbose_name=("Is subject a minor?"),
         max_length=10,
@@ -66,7 +73,7 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
     )
 
     def __str__(self):
-        return '{0} ({1}) V{2}'.format(
+        return '{0} V{1}'.format(
             self.subject_identifier,
             self.version)
 
