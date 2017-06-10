@@ -17,9 +17,7 @@ visit0 = Visit(
     code='C1',
     title='Clinic Subject Survey',
     timepoint=0,
-    rbase=relativedelta(years=0),
-    rlower=relativedelta(years=0),
-    rupper=relativedelta(years=1),
+    rbase=relativedelta(days=0),
     requisitions=requisitions,
     crfs=crfs)
 
