@@ -3,7 +3,7 @@ from edc_base.model_mixins import BaseUuidModel
 from edc_offstudy.model_mixins import OffstudyModelMixin, OffstudyModelManager
 
 
-class OffStudy(OffstudyModelMixin, BaseUuidModel):
+class SubjectOffstudy(OffstudyModelMixin, BaseUuidModel):
 
     objects = OffstudyModelManager()
 

@@ -14,8 +14,8 @@ from edc_base.utils import get_utcnow
 class TestSubjectConsent(TestCase):
 
     def setUp(self):
-        self.subject_screening = mommy.make_recipe(
-            'bcpp_clinic_screening.cliniceligibility')
+        self.subject_eligibility = mommy.make_recipe(
+            'bcpp_clinic_screening.subjecteligibility')
 
     def test_cannot_create_consent_without_screening(self):
         """Test adding a consent without Clinic Eligibility first raises an
