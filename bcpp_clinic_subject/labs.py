@@ -1,4 +1,5 @@
-from edc_lab import AliquotType, LabProfile, ProcessingProfile, RequisitionPanel, Process
+from edc_lab import AliquotType, LabProfile, ProcessingProfile, RequisitionPanel
+from edc_lab.lab.processing_profile import Process
 from edc_lab.site_labs import site_labs
 
 from .constants import VIRAL_LOAD, RESEARCH_BLOOD_DRAW
@@ -25,14 +26,14 @@ processing_profile.add_processes(process_rbd_bc, process_rbd_pl)
 
 panel_vl = RequisitionPanel(
     name=VIRAL_LOAD,
-    model='bcpp_subject_clinic.subjectrequisition',
+    model='bcpp_clinic_subject.subjectrequisition',
     aliquot_type=wb,
     abbreviation='VL',
     processing_profile=processing_profile)
 
 panel_rbd = RequisitionPanel(
     name=RESEARCH_BLOOD_DRAW,
-    model='bcpp_subject_clinic.subjectrequisition',
+    model='bcpp_clinic_subject.subjectrequisition',
     aliquot_type=wb,
     abbreviation='RBD',
     processing_profile=processing_profile)
@@ -40,7 +41,7 @@ panel_rbd = RequisitionPanel(
 
 lab_profile = LabProfile(
     name='bcpp_clinic_subject',
-    requisition_model='bcpp_subject_clinic.subjectrequisition')
+    requisition_model='bcpp_clinic_subject.subjectrequisition')
 lab_profile.add_panel(panel_vl)
 lab_profile.add_panel(panel_rbd)
 

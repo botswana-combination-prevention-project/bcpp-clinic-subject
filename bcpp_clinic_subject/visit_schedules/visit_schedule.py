@@ -1,6 +1,7 @@
 from django.core.management.color import color_style
 
 from edc_visit_schedule import VisitSchedule, site_visit_schedules
+
 from .schedule import schedule1
 
 

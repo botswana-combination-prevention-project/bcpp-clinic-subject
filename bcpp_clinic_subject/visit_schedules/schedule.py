@@ -3,9 +3,7 @@ from dateutil.relativedelta import relativedelta
 from edc_visit_schedule import Schedule, Visit
 
 from .requisitions import requisitions
-
-from ..visit_schedule import crfs
-
+from .crfs import crfs
 
 schedule1 = Schedule(
     name='schedule1',
