@@ -3,7 +3,7 @@
 from dateutil.relativedelta import relativedelta
 
 from faker import Faker
-from model_mommy.recipe import Recipe, seq
+from model_mommy.recipe import Recipe
 
 from edc_base.utils import get_utcnow
 
@@ -26,7 +26,7 @@ subjectconsent = Recipe(
     SubjectConsent,
     subject_identifier=None,
     study_site='40',
-    consent_datetime=get_utcnow,
+    consent_datetime=get_utcnow(),
     dob=(get_utcnow() - relativedelta(years=25)).date(),
     first_name='TEST',
     last_name='TEST',

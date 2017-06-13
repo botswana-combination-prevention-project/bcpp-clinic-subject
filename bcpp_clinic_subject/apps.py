@@ -1,7 +1,5 @@
 from django.apps import AppConfig as DjangoApponfig
 
-from edc_visit_tracking.apps import AppConfig as BaseEdcVisitTrackingAppConfig
-
 
 class AppConfig(DjangoApponfig):
     name = 'bcpp_clinic_subject'
@@ -14,7 +12,5 @@ class AppConfig(DjangoApponfig):
     eligibility_age_adult_lower = 16
     eligibility_age_adult_upper = 64
 
-
-class EdcVisitTrackingAppConfig(BaseEdcVisitTrackingAppConfig):
-    visit_models = {
-        'bcpp_clinic_subject': ('subject_visit', 'bcpp_clinic_subject.subjectvisit')}
+    def ready(self):
+        from .models.signals import subject_consent_on_post_save
