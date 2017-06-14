@@ -1,31 +1,27 @@
-import uuid
-
 from django.db import models
 
 from edc_base.model_mixins.base_uuid_model import BaseUuidModel
 
-from edc_consent.field_mixins.bw.identity_fields_mixin import IdentityFieldsMixin
 from edc_consent.field_mixins import CitizenFieldsMixin
 from edc_consent.field_mixins import PersonalFieldsMixin
 from edc_consent.field_mixins import ReviewFieldsMixin
 from edc_consent.field_mixins import SampleCollectionFieldsMixin
 from edc_consent.field_mixins import VulnerabilityFieldsMixin
+from edc_consent.field_mixins.bw.identity_fields_mixin import IdentityFieldsMixin
 from edc_consent.model_mixins import ConsentModelMixin
 
 from edc_constants.choices import YES_NO
 
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
-from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin as BaseUpdatesOrCreatesRegistrationModelMixin
+from edc_registration.model_mixins import (
+    UpdatesOrCreatesRegistrationModelMixin as BaseUpdatesOrCreatesRegistrationModelMixin)
 from edc_search.model_mixins import SearchSlugModelMixin
-from edc_registration.exceptions import RegisteredSubjectError
-from bcpp_clinic_screening.models.subject_eligibility import SubjectEligibility
-from bcpp_clinic_screening.exceptions import ElibilityError
 
 from .enrollment import Enrollment
 
 
-class UpdateOrCreateEnrollment:
-    """Update or creates an enrollement after consent is created.
+class CreateEnrollment:
+    """Create an enrollment if does not exist after consent is created.
     """
 
     def update_or_create_enrollment(self, subject_eligibility):
@@ -48,30 +44,6 @@ class UpdatesOrCreatesRegistrationModelMixin(BaseUpdatesOrCreatesRegistrationMod
     def registration_unique_field(self):
         return 'registration_identifier'
 
-    def registration_raise_on_illegal_value_change(self, registered_subject):
-        """Raises an exception if a value changes between
-        updates.
-        """
-        pass
-#         if registered_subject.identity != self.identity:
-#             raise RegisteredSubjectError(
-#                 'Identity may not be changed. Expected {}. Got {}'.format(
-#                     registered_subject.identity,
-#                     self.identity))
-#         if (registered_subject.registration_identifier
-#             and uuid.UUID(registered_subject.registration_identifier) !=
-#                 self.household_member.internal_identifier):
-#             raise RegisteredSubjectError(
-#                 'Internal Identifier may not be changed. Expected {}. '
-#                 'Got {}'.format(
-#                     registered_subject.registration_identifier,
-#                     self.household_member.internal_identifier))
-#         if registered_subject.dob != self.dob:
-#             raise RegisteredSubjectError(
-#                 'DoB may not be changed. Expected {}. Got {}'.format(
-#                     registered_subject.dob,
-#                     self.dob))
-
     class Meta:
         abstract = True
 
@@ -81,7 +53,7 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
                      ReviewFieldsMixin, PersonalFieldsMixin,
                      SampleCollectionFieldsMixin, CitizenFieldsMixin,
                      VulnerabilityFieldsMixin, SearchSlugModelMixin,
-                     UpdateOrCreateEnrollment, BaseUuidModel):
+                     CreateEnrollment, BaseUuidModel):
     """ A model completed by the user that captures the ICF.
     """
 

@@ -1,9 +1,10 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from .subject_consent import SubjectConsent
-from bcpp_clinic_screening.models import SubjectEligibility
 from bcpp_clinic_screening.exceptions import ElibilityError
+from bcpp_clinic_screening.models import SubjectEligibility
+
+from .subject_consent import SubjectConsent
 
 
 @receiver(post_save, weak=False, sender=SubjectConsent,
