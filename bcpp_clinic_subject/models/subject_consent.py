@@ -13,11 +13,10 @@ from edc_consent.model_mixins import ConsentModelMixin
 from edc_constants.choices import YES_NO
 
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
-from edc_registration.model_mixins import (
-    UpdatesOrCreatesRegistrationModelMixin as BaseUpdatesOrCreatesRegistrationModelMixin)
 from edc_search.model_mixins import SearchSlugModelMixin
 
 from .enrollment import Enrollment
+from bcpp_clinic_screening.models import UpdatesOrCreatesRegistrationModelMixin
 
 
 class CreateEnrollment:
@@ -38,16 +37,6 @@ class CreateEnrollment:
                 is_eligible=subject_eligibility.is_eligible)
 
 
-class UpdatesOrCreatesRegistrationModelMixin(BaseUpdatesOrCreatesRegistrationModelMixin):
-
-    @property
-    def registration_unique_field(self):
-        return 'registration_identifier'
-
-    class Meta:
-        abstract = True
-
-
 class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
                      NonUniqueSubjectIdentifierModelMixin, IdentityFieldsMixin,
                      ReviewFieldsMixin, PersonalFieldsMixin,
@@ -61,8 +50,7 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
         verbose_name='Eligibility Identifier',
         max_length=50,
         blank=True,
-        unique=True,
-        editable=False)
+        unique=True)
 
     registration_identifier = models.CharField(
         verbose_name='Registration Identifier',

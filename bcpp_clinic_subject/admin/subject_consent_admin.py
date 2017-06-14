@@ -5,6 +5,9 @@ from edc_base.modeladmin_mixins import ModelAdminInstitutionMixin
 from edc_base.modeladmin_mixins import ModelAdminNextUrlRedirectMixin
 from edc_consent.modeladmin_mixins import ModelAdminConsentMixin
 
+from edc_base.modeladmin_mixins import (
+    audit_fieldset_tuple, audit_fields)
+
 from ..admin_site import bcpp_clinic_subject_admin
 from ..forms import SubjectConsentForm
 from ..models import SubjectConsent
@@ -20,6 +23,7 @@ class SubjectConsentAdmin(ModelAdminConsentMixin, ModelAdminRevisionMixin,
 
     list_display = (
         'subject_identifier',
+        'eligibility_identifier',
         'htc_identifier',
         'lab_identifier',
         'pims_identifier',
@@ -35,8 +39,10 @@ class SubjectConsentAdmin(ModelAdminConsentMixin, ModelAdminRevisionMixin,
         'user_created',
         'user_modified'
     )
+
     fields = (
         'subject_identifier',
+        'eligibility_identifier',
         'first_name',
         'last_name',
         'initials',
@@ -70,3 +76,7 @@ class SubjectConsentAdmin(ModelAdminConsentMixin, ModelAdminRevisionMixin,
         'citizen': admin.VERTICAL,
         'legal_marriage': admin.VERTICAL,
         'marriage_certificate': admin.VERTICAL})
+
+    def get_readonly_fields(self, request, obj=None):
+        return (super().get_readonly_fields(request, obj=obj)
+                + audit_fields)
