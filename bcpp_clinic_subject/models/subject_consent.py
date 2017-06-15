@@ -13,10 +13,10 @@ from edc_consent.model_mixins import ConsentModelMixin
 from edc_constants.choices import YES_NO
 
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
-from edc_search.model_mixins import SearchSlugModelMixin
 
 from .enrollment import Enrollment
 from bcpp_clinic_screening.models import UpdatesOrCreatesRegistrationModelMixin
+from .model_mixins import SearchSlugModelMixin
 
 
 class CreateEnrollment:
