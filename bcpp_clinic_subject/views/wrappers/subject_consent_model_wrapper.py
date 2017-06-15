@@ -11,7 +11,3 @@ class SubjectConsentModelWrapper(ModelWrapper):
     next_url_attrs = ['subject_identifier', ]
     querystring_attrs = [
         'gender', 'eligibility_identifier', 'first_name', 'initials', 'modified']
-
-    @property
-    def subject_identifier(self):
-        return str(self.object.subject_identifier)
