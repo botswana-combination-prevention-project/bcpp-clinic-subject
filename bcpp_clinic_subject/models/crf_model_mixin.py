@@ -25,7 +25,7 @@ class CrfModelMixin(VisitTrackingCrfModelMixin, OffstudyMixin,
                     UpdatesCrfMetadataModelMixin,
                     FormAsJSONModelMixin, BaseUuidModel):
 
-    """ Base model for all scheduled models (adds key to :class:`CLiinicVisit`).
+    """ Base model for all scheduled models (adds key to :class:`SubjectVisit`).
     """
 
     subject_visit = models.OneToOneField(SubjectVisit, on_delete=PROTECT)
