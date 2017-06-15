@@ -7,7 +7,7 @@ from ..admin import CrfModelAdminMixin
 
 
 @admin.register(VlResult, site=bcpp_clinic_subject_admin)
-class ClinicVlResultAdmin(CrfModelAdminMixin, admin.ModelAdmin):
+class VlResultAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = VlResultForm
     fields = (
