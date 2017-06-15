@@ -22,9 +22,9 @@ class DashboardView(
     navbar_item_selected = 'bcpp_clinic_subject'
     consent_model_wrapper_class = SubjectConsentModelWrapper
     consent_model = SubjectConsent
-    crf_model_wrapper_class = CrfModelWrapper
-    requisition_model_wrapper_class = RequisitionModelWrapper
-    visit_model_wrapper_class = SubjectVisitModelWrapper
+    crf_model_wrapper_cls = CrfModelWrapper
+    requisition_model_wrapper_cls = RequisitionModelWrapper
+    visit_model_wrapper_cls = SubjectVisitModelWrapper
 
     def __init__(self, **kwargs):
         super().__init__(**kwargs)

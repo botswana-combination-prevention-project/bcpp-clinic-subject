@@ -1,4 +1,4 @@
-from bcpp_clinic_validations.form_validations import QuestionnaireFormValidator
+from bcpp_clinic_validations.form_validators import QuestionnaireFormValidator
 
 from ..models import Questionnaire
 from .modelform_mixin import SubjectModelFormMixin
