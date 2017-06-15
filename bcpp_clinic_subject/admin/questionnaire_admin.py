@@ -1,5 +1,8 @@
 from django.contrib import admin
 
+from edc_base.modeladmin_mixins import audit_fieldset_tuple
+
+
 from ..admin import CrfModelAdminMixin
 from ..admin_site import bcpp_clinic_subject_admin
 from ..forms import QuestionnaireForm
@@ -10,16 +13,12 @@ from ..models import Questionnaire
 class QuestionnaireAdmin(CrfModelAdminMixin, admin.ModelAdmin):
 
     form = QuestionnaireForm
-    fields = (
-        "subject_visit",
-        "report_datetime",
-        "registration_type",
-        "on_arv",
-        "knows_last_cd4",
-        "cd4_count",
-    )
+
     radio_fields = {
         "registration_type": admin.VERTICAL,
+        "know_hiv_status": admin.VERTICAL,
+        "current_hiv_status": admin.VERTICAL,
+        "arv_evidence": admin.VERTICAL,
         "on_arv": admin.VERTICAL,
         "knows_last_cd4": admin.VERTICAL,
     }
@@ -28,7 +27,17 @@ class QuestionnaireAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         'report_datetime')
     list_filter = ('on_arv', 'report_datetime')
     search_fields = ('on_arv',)
-    instructions = [(
-        "Note to Interviewer: The OTHER NON Viral LOAD visit also refers to:"
-        " A patient who may be coming in for a: i. Drug Refill, ii. CD4 count"
-        " iii. Phlebotomy, iv. Sick visit, etc ")]
+
+    fieldsets = (
+        (None, {
+            'fields': (
+                "subject_visit",
+                "report_datetime",
+                "registration_type",
+                "know_hiv_status",
+                "current_hiv_status",
+                "arv_evidence",
+                "on_arv",
+                "knows_last_cd4",
+                "cd4_count",)}),
+        audit_fieldset_tuple)

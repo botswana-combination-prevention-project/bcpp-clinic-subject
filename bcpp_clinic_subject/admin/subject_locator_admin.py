@@ -6,6 +6,7 @@ from ..admin_site import bcpp_clinic_subject_admin
 from ..forms import SubjectLocatorForm
 from ..models import SubjectLocator
 from .model_admin_mixin import ModelAdminMixin
+from edc_base.modeladmin_mixins import audit_fieldset_tuple
 
 
 @admin.register(SubjectLocator, site=bcpp_clinic_subject_admin)
@@ -13,32 +14,37 @@ class SubjectLocatorAdmin(ModelAdminMixin, FieldsetsModelAdminMixin,
                           admin.ModelAdmin):
 
     form = SubjectLocatorForm
-    fields = (
-        'mail_address',
-        'home_visit_permission',
-        'physical_address',
-        'may_follow_up',
-        'may_sms_follow_up',
-        'subject_cell',
-        'subject_cell_alt',
-        'subject_phone',
-        'subject_phone_alt',
-        'may_contact_someone',
-        'contact_name',
-        'contact_rel',
-        'contact_physical_address',
-        'contact_cell',
-        'alt_contact_cell_number',
-        'contact_phone',
-        'has_alt_contact',
-        'alt_contact_name',
-        'alt_contact_rel',
-        'alt_contact_cell',
-        'other_alt_contact_cell',
-        'alt_contact_tel',
-        'may_call_work',
-        'subject_work_place',
-        'subject_work_phone',)
+
+    fieldsets = (
+        (None, {
+            'fields': (
+                'mail_address',
+                'home_visit_permission',
+                'physical_address',
+                'may_follow_up',
+                'may_sms_follow_up',
+                'subject_cell',
+                'subject_cell_alt',
+                'subject_phone',
+                'subject_phone_alt',
+                'may_contact_someone',
+                'contact_name',
+                'contact_rel',
+                'contact_physical_address',
+                'contact_cell',
+                'alt_contact_cell_number',
+                'contact_phone',
+                'has_alt_contact',
+                'alt_contact_name',
+                'alt_contact_rel',
+                'alt_contact_cell',
+                'other_alt_contact_cell',
+                'alt_contact_tel',
+                'may_call_work',
+                'subject_work_place',
+                'subject_work_phone',)}),
+        audit_fieldset_tuple)
+
     radio_fields = {
         "home_visit_permission": admin.VERTICAL,
         "may_follow_up": admin.VERTICAL,
