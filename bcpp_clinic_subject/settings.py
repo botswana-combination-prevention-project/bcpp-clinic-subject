@@ -57,6 +57,7 @@ INSTALLED_APPS = [
     'tz_detect',
     'rest_framework',
     'rest_framework.authtoken',
+    'bcpp_clinic_validations',
     'django_crypto_fields.apps.AppConfig',
     'django_revision.apps.AppConfig',
     'edc_consent.apps.AppConfig',
@@ -77,7 +78,6 @@ INSTALLED_APPS = [
     'bcpp_clinic.apps.EdcSyncFilesAppConfig',
     'bcpp_clinic_subject.apps.AppConfig',
     'bcpp_clinic_screening.apps.AppConfig',
-    'bcpp_clinic_validations.apps.AppConfig'
 ]
 
 
