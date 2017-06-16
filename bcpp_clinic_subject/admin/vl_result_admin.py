@@ -13,13 +13,15 @@ class VlResultAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     fields = (
         'subject_visit',
         'report_datetime',
-        'site',
+        'study_site',
         'clinician_initials',
         'collection_datetime',
+        'test_datetime',
         'assay_date',
         'result_value',
+        'received_datetime',
         'comment',
-        'validation_date',
+        'validation_datetime',
         'validated_by')
 
     list_display = ('subject_visit', 'clinician_initials',
