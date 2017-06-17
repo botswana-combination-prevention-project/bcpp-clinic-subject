@@ -1,6 +1,14 @@
 from django.db import models
 
 
+class SubjectConsentManager(models.Manager):
+
+    def get_by_natural_key(self, subject_identifier, eligibility_identifier):
+        return self.get(
+            subject_identifier=subject_identifier,
+            eligibility_identifier=eligibility_identifier)
+
+
 class DailyLogManager(models.Manager):
 
     def get_by_natural_key(self, report_date, hostname_created):

@@ -38,6 +38,10 @@ class CrfModelMixin(VisitTrackingCrfModelMixin, OffstudyMixin,
         help_text=('If reporting today, use today\'s date/time, otherwise use '
                    'the date/time this information was reported.'))
 
+    def natural_key(self):
+        return self.subject_visit.natural_key()
+    natural_key.dependencies = ['bcpp_clinic_subject.subjectvisit']
+
     history = HistoricalRecords()
 
     class Meta(VisitTrackingCrfModelMixin.Meta, BaseRequiresConsentMixin.Meta):

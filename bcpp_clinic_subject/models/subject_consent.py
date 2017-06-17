@@ -14,8 +14,10 @@ from edc_constants.choices import YES_NO
 
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 
-from .enrollment import Enrollment
 from bcpp_clinic_screening.models import UpdatesOrCreatesRegistrationModelMixin
+
+from ..managers import SubjectConsentManager
+from .enrollment import Enrollment
 from .model_mixins import SearchSlugModelMixin
 
 
@@ -98,6 +100,11 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
         help_text="if known."
     )
 
+    objects = SubjectConsentManager()
+
+    def natural_key(self):
+        return (self.subject_identifier, self.registration_identifier,)
+
     def __str__(self):
         return '{0} V{1}'.format(
             self.subject_identifier,
@@ -110,4 +117,4 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
     class Meta(ConsentModelMixin.Meta):
         verbose_name = 'Clinic Consent RBD'
         verbose_name_plural = 'Clinic Consent RBD'
-        ordering = ('-created', )
+        ordering = ('-created',)

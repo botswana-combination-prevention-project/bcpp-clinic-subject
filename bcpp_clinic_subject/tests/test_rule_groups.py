@@ -1,54 +1,19 @@
-from model_mommy import mommy
-
 from django.test import TestCase, tag
-from django.utils import timezone
 
+from edc_constants.constants import YES, POS, NO, OTHER
 
-from edc_constants.constants import MALE, NOT_APPLICABLE, YES, POS, NO, OTHER
-
-from edc_base.utils import get_utcnow
 from edc_metadata.constants import REQUIRED, NOT_REQUIRED
 from edc_metadata.models import RequisitionMetadata, CrfMetadata
-from edc_visit_tracking.constants import SCHEDULED
 
-from bcpp_clinic_screening.constants import ABLE_TO_PARTICIPATE
-from bcpp_clinic_screening.models import SubjectEligibility
 
 from ..constants import INITIATION, VIRAL_LOAD, MASA_VL_SCHEDULED
-from ..models.appointment import Appointment
 from ..models.questionnaire import Questionnaire
-from ..models.subject_visit import SubjectVisit
 from ..models.viral_load_tracking import ViralLoadTracking
+from bcpp_clinic_subject.tests.test_clinic_mixin import TestClinicMixin
 
 
 @tag('rules')
-class TestRuleGroups(TestCase):
-
-    def complete_clinic_visit(self):
-        def make_eligibility():
-            options = dict(
-                report_datetime=timezone.now(),
-                part_time_resident=YES,
-                initials='TT',
-                gender=MALE,
-                has_identity=YES,
-                hiv_status=POS,
-                inability_to_participate=ABLE_TO_PARTICIPATE,
-                citizen=YES,
-                literacy=YES,
-                guardian=NOT_APPLICABLE,
-                age_in_years=27)
-            eligibility = SubjectEligibility.objects.create(**options)
-            self.assertTrue(eligibility.is_eligible)
-            return eligibility
-        subject_consent = mommy.make_recipe(
-            'bcpp_clinic_subject.subjectconsent',
-            eligibility_identifier=make_eligibility().eligibility_identifier)
-        appointment = Appointment.objects.get(
-            subject_identifier=subject_consent.subject_identifier)
-        return SubjectVisit.objects.create(
-            report_datetime=get_utcnow(), appointment=appointment,
-            reason=SCHEDULED)
+class TestRuleGroups(TestClinicMixin, TestCase):
 
     @tag('vl_required')
     def test_clinic_viral_load_required(self):
