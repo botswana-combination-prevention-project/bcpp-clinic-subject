@@ -57,7 +57,7 @@ class ViralLoadTrackingRuleGroup(RuleGroup):
             consequence=REQUIRED,
             alternative=NOT_REQUIRED),
         target_model='bcpp_clinic_subject.subjectrequisition',
-        target_panels=[panel_vl, ])
+        target_panels=[panel_vl])
 
     class Meta:
         app_label = 'bcpp_clinic_subject'
