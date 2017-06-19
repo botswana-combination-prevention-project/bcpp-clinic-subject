@@ -17,7 +17,7 @@ from django.core.management.color import color_style
 from pathlib import PurePath
 
 # Build paths inside the project like this: os.path.join(BASE_DIR, ...)
-BASE_DIR = os.path.dirname(os.path.realpath(__file__))
+BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 
 style = color_style()
 
@@ -77,26 +77,6 @@ INSTALLED_APPS = [
     'bcpp_clinic_screening.apps.AppConfig',
 ]
 
-
-if 'test' in sys.argv:
-    MIGRATION_MODULES = {
-        'django_crypto_fields': None,
-        'bcpp_clinic_subject': None,
-        'edc_appointment': None,
-        'edc_consent': None,
-        'edc_locator': None,
-        'edc_offstudy': None,
-        'edc_death_report': None,
-        'edc_identifier': None,
-        'edc_lab': None,
-        'edc_metadata': None,
-        'edc_registration': None,
-        'edc_sync': None,
-        'admin': None,
-        'auth': None,
-        'edc_sync_files': None,
-        'sessions': None,
-    }
 
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
@@ -175,17 +155,28 @@ USE_TZ = True
 
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/1.9/howto/static-files/
-STATIC_ROOT = os.path.join(BASE_DIR, APP_NAME, 'static')
+STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATIC_URL = '/static/'
-MEDIA_ROOT = os.path.join(BASE_DIR, APP_NAME, 'media')
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
-MEDIA_URL = '/media/'
-
+KEY_PATH = os.path.join(BASE_DIR, 'crypto_fields')
 GIT_DIR = BASE_DIR
-
-KEY_PATH = os.path.join(str(PurePath(BASE_DIR).parent), 'crypto_fields')
 
 CURRENT_MAP_AREA = 'test_community'
 DEVICE_ID = '21'
 DEVICE_ROLE = 'Client'
 LABEL_PRINTER = 'label_printer'
+
+
+if 'test' in sys.argv:
+
+    class DisableMigrations:
+        def __contains__(self, item):
+            return True
+
+        def __getitem__(self, item):
+            return None
+
+    MIGRATION_MODULES = DisableMigrations()
+    PASSWORD_HASHERS = ('django.contrib.auth.hashers.MD5PasswordHasher', )
+    DEFAULT_FILE_STORAGE = 'inmemorystorage.InMemoryStorage'
