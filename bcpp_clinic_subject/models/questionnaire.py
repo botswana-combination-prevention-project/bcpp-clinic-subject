@@ -2,7 +2,7 @@ from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
 
 from edc_base.model_fields.custom_fields import OtherCharField
-from edc_constants.choices import YES_NO_DWTA, POS_NEG_ONLY, YES_NO
+from edc_constants.choices import YES_NO_DWTA, POS_NEG_ONLY, YES_NO_NA
 
 from ..choices import REGISTRATION_TYPES
 from ..models.crf_model_mixin import CrfModelMixin
@@ -44,7 +44,7 @@ class Questionnaire(CrfModelMixin):
     arv_evidence = models.CharField(
         verbose_name="Do you have evidence of the antiretroviral therapy ARVs you're taking?",
         max_length=25,
-        choices=YES_NO
+        choices=YES_NO_NA
     )
 
     knows_last_cd4 = models.CharField(
