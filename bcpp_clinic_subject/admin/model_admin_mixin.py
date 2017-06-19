@@ -37,29 +37,3 @@ class CrfModelAdminMixin(VisitTrackingCrfModelAdminMixin,
         'When all required questions are complete click SAVE. '
         'Based on your responses, additional questions may be '
         'required or some answers may need to be corrected.')
-
-    def post_url_on_delete_kwargs(self, request, obj):
-        return dict(
-            subject_identifier=obj.subject_identifier,
-            household_identifier=(
-                obj.subject_visit
-                .household_member
-                .household_structure
-                .household
-                .household_identifier),
-            appointment=str(obj.subject_visit.appointment.id),
-            survey_schedule=obj.subject_visit.survey_schedule_object.field_value,
-            survey=obj.subject_visit.survey_object.field_value)
-
-    def view_on_site(self, obj):
-        household_member = obj.subject_visit.household_member
-        try:
-            return reverse(
-                'bcpp_clinic_subject:dashboard_url', kwargs=dict(
-                    subject_identifier=household_member.subject_identifier,
-                    household_identifier=(household_member.household_structure.
-                                          household.household_identifier),
-                    survey=obj.subject_visit.survey_object.field_value,
-                    survey_schedule=obj.subject_visit.survey_schedule_object.field_value))
-        except NoReverseMatch:
-            return super().view_on_site(obj)

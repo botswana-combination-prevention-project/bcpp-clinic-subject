@@ -1,1 +1,2 @@
-# clinic-subject
+# bcpp-clinic-subject
+[![Build Status](https://travis-ci.org/botswana-harvard/bcpp-clinic-subject.svg?branch=develop)](https://travis-ci.org/botswana-harvard/bcpp-clinic-subject) [![Coverage Status](https://coveralls.io/repos/github/botswana-harvard/bcpp-clinic-subject/badge.svg?branch=develop)](https://coveralls.io/github/botswana-harvard/bcpp-clinic-subject?branch=develop)

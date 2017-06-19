@@ -4,7 +4,7 @@ db.sqlite3
 .settings
 .DS_Store
 etc/*
-
+*migrations
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]

@@ -2,19 +2,41 @@ from django.db import models
 
 from edc_base.model_mixins.base_uuid_model import BaseUuidModel
 
-from edc_consent.field_mixins.bw.identity_fields_mixin import IdentityFieldsMixin
 from edc_consent.field_mixins import CitizenFieldsMixin
 from edc_consent.field_mixins import PersonalFieldsMixin
 from edc_consent.field_mixins import ReviewFieldsMixin
 from edc_consent.field_mixins import SampleCollectionFieldsMixin
 from edc_consent.field_mixins import VulnerabilityFieldsMixin
+from edc_consent.field_mixins.bw.identity_fields_mixin import IdentityFieldsMixin
 from edc_consent.model_mixins import ConsentModelMixin
 
 from edc_constants.choices import YES_NO
 
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
-from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
-from edc_search.model_mixins import SearchSlugModelMixin
+
+from bcpp_clinic_screening.models import UpdatesOrCreatesRegistrationModelMixin
+
+from ..managers import SubjectConsentManager
+from .enrollment import Enrollment
+from .model_mixins import SearchSlugModelMixin
+
+
+class CreateEnrollment:
+    """Create an enrollment if does not exist after consent is created.
+    """
+
+    def update_or_create_enrollment(self, subject_eligibility):
+        """Updates or creates an enrollment.
+        """
+        try:
+            Enrollment.objects.get(
+                subject_identifier=self.subject_identifier,
+                visit_schedule_name=Enrollment._meta.visit_schedule_name)
+        except Enrollment.DoesNotExist:
+            Enrollment.objects.create(
+                subject_identifier=self.subject_identifier,
+                consent_identifier=self.consent_identifier,
+                is_eligible=subject_eligibility.is_eligible)
 
 
 class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
@@ -22,9 +44,22 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
                      ReviewFieldsMixin, PersonalFieldsMixin,
                      SampleCollectionFieldsMixin, CitizenFieldsMixin,
                      VulnerabilityFieldsMixin, SearchSlugModelMixin,
-                     BaseUuidModel):
+                     CreateEnrollment, BaseUuidModel):
     """ A model completed by the user that captures the ICF.
     """
+
+    eligibility_identifier = models.CharField(
+        verbose_name='Eligibility Identifier',
+        max_length=50,
+        blank=True,
+        unique=True)
+
+    registration_identifier = models.CharField(
+        verbose_name='Registration Identifier',
+        max_length=50,
+        blank=True,
+        unique=True,
+        editable=False)
 
     is_minor = models.CharField(
         verbose_name=("Is subject a minor?"),
@@ -65,12 +100,21 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
         help_text="if known."
     )
 
+    objects = SubjectConsentManager()
+
+    def natural_key(self):
+        return (self.subject_identifier, self.registration_identifier,)
+
     def __str__(self):
-        return '{0} ({1}) V{2}'.format(
+        return '{0} V{1}'.format(
             self.subject_identifier,
             self.version)
+
+    def save(self, *args, **kwargs):
+        self.registration_identifier = self.eligibility_identifier
+        super().save(*args, **kwargs)
 
     class Meta(ConsentModelMixin.Meta):
         verbose_name = 'Clinic Consent RBD'
         verbose_name_plural = 'Clinic Consent RBD'
-        ordering = ('-created', )
+        ordering = ('-created',)

@@ -6,3 +6,5 @@ from .daily_log_admin import DailyLogAdmin
 from .questionnaire_admin import QuestionnaireAdmin
 from .viral_load_tracking_admin import ViralLoadTrackingAdmin
 from .appointment_admin import AppointmentAdmin
+from .subject_requisition_admin import SubjectRequisitionAdmin
+from .vl_result_admin import VlResultAdmin

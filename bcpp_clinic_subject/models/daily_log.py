@@ -2,8 +2,11 @@ import arrow
 
 from django.db import models
 
+from edc_base.model_managers.historical_records import HistoricalRecords
 from edc_base.model_mixins.base_uuid_model import BaseUuidModel
 from edc_base.utils import get_utcnow
+
+from ..managers import DailyLogManager
 
 
 class DailyLog(BaseUuidModel):
@@ -13,7 +16,8 @@ class DailyLog(BaseUuidModel):
 
     report_datetime = models.DateTimeField(default=get_utcnow)
 
-    report_date = models.DateTimeField(editable=False, null=True)
+    report_date = models.DateTimeField(
+        editable=False, null=True, unique=True)
 
     from_pharma = models.IntegerField(
         verbose_name='Number of patients referred from pharmacy')
@@ -50,8 +54,15 @@ class DailyLog(BaseUuidModel):
         verbose_name='Number of patients who refused to complete the eligibility checklist',
     )
 
+    objects = DailyLogManager()
+
+    history = HistoricalRecords()
+
     def __str__(self):
         return self.report_date.strftime('%Y-%m-%d')
+
+    def natural_key(self):
+        return (self.report_date, self.hostname_created,)
 
     def save(self, *args, **kwargs):
         self.report_date = arrow.Arrow.from_datetime(

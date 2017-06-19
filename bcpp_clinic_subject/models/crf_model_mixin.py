@@ -25,7 +25,7 @@ class CrfModelMixin(VisitTrackingCrfModelMixin, OffstudyMixin,
                     UpdatesCrfMetadataModelMixin,
                     FormAsJSONModelMixin, BaseUuidModel):
 
-    """ Base model for all scheduled models (adds key to :class:`CLiinicVisit`).
+    """ Base model for all scheduled models (adds key to :class:`SubjectVisit`).
     """
 
     subject_visit = models.OneToOneField(SubjectVisit, on_delete=PROTECT)
@@ -37,6 +37,10 @@ class CrfModelMixin(VisitTrackingCrfModelMixin, OffstudyMixin,
         default=get_utcnow,
         help_text=('If reporting today, use today\'s date/time, otherwise use '
                    'the date/time this information was reported.'))
+
+    def natural_key(self):
+        return self.subject_visit.natural_key()
+    natural_key.dependencies = ['bcpp_clinic_subject.subjectvisit']
 
     history = HistoricalRecords()
 
