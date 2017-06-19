@@ -170,7 +170,6 @@ DEVICE_ID = '21'
 DEVICE_ROLE = 'Client'
 LABEL_PRINTER = 'label_printer'
 
-
 if 'test' in sys.argv:
 
     class DisableMigrations:
