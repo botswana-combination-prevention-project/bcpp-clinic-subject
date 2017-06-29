@@ -4,6 +4,7 @@ from .test_clinic_mixin import TestClinicMixin
 from bcpp_clinic_screening.models.subject_eligibility import SubjectEligibility
 from bcpp_clinic_subject.models.subject_consent import SubjectConsent
 from bcpp_clinic_subject.models.subject_visit import SubjectVisit
+from bcpp_clinic_subject.tests.subject_helper import SubjectHelper
 
 
 @tag('test_mixin')
@@ -11,6 +12,8 @@ class TestMixin(TestCase, TestClinicMixin):
     """ Enroll eligible member into a clinic. Complete Subject Eligibility,
     Subject Consent and Subject Visit.
     """
+
+    subject_helper = SubjectHelper()
 
     def test_subject_eligibility(self):
         """ Assert eligible subject eligibility.
