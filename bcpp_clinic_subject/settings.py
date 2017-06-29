@@ -173,6 +173,7 @@ LABEL_PRINTER = 'label_printer'
 if 'test' in sys.argv:
 
     class DisableMigrations:
+
         def __contains__(self, item):
             return True
 

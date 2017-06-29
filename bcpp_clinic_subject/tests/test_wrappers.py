@@ -1,26 +1,54 @@
 from django.test import TestCase, tag
 
-from ..views import SubjectConsentModelWrapper
-from ..models import SubjectConsent
 from model_mommy import mommy
+
+from bcpp_clinic_screening.tests import ScreeningTestHelper
+
+from ..models import SubjectConsent
+from ..models.questionnaire import Questionnaire
+from ..views import SubjectConsentModelWrapper
+from ..views.wrappers.crf_model_wrapper import CrfModelWrapper
+from .subject_helper import SubjectHelper
 
 
 @tag('wrappers')
 class TestWrappers(TestCase):
 
-    def test_household_model_wrapper(self):
+    subject_helper = SubjectHelper()
+    screening_test_helper = ScreeningTestHelper()
+
+    def test_consent_model_wrapper(self):
         wrapper = SubjectConsentModelWrapper(
             model_obj=SubjectConsent())
         self.assertIsNotNone(wrapper.href)
 
-    def test_household_model_wrapper_add(self):
+    def test_consent_model_wrapper_add(self):
         wrapper = SubjectConsentModelWrapper(model_obj=SubjectConsent())
         self.assertIn('add', wrapper.href)
 
-    def test_household_model_wrapper_change(self):
+    def test_consent_model_wrapper_change(self):
+        options = {'identity': '12315678', 'confirm_identity': '12315678'}
+        subject_eligibility = self.screening_test_helper.make_eligibility()
         model_obj = mommy.make_recipe(
             'bcpp_clinic_subject.subjectconsent',
-            eligibility_identifier='1234')
+            **options,
+            eligibility_identifier=subject_eligibility.eligibility_identifier)
         wrapper = SubjectConsentModelWrapper(model_obj=model_obj)
         self.assertIn('change', wrapper.href)
-        self.assertIn(model_obj.pk, wrapper.href)
+
+    def test_crf_model_wrapper(self):
+        wrapper = CrfModelWrapper(
+            model_obj=Questionnaire())
+        self.assertIsNotNone(wrapper.href)
+
+    def test_crf_model_wrapper_add(self):
+        wrapper = CrfModelWrapper(model_obj=Questionnaire())
+        self.assertIn('add', wrapper.href)
+
+    def test_crf_model_wrapper_change(self):
+        subject_visit = self.subject_helper.complete_clinic_visit()
+        model_obj = mommy.make_recipe(
+            'bcpp_clinic_subject.questionnaire',
+            subject_visit=subject_visit)
+        wrapper = CrfModelWrapper(model_obj=model_obj)
+        self.assertIn('change', wrapper.href)

@@ -48,7 +48,7 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
     """ A model completed by the user that captures the ICF.
     """
 
-    eligibility_identifier = models.CharField(
+    screening_identifier = models.CharField(
         verbose_name='Eligibility Identifier',
         max_length=50,
         blank=True,

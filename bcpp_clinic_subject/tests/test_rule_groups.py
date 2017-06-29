@@ -9,17 +9,19 @@ from edc_metadata.models import RequisitionMetadata, CrfMetadata
 from ..constants import INITIATION, VIRAL_LOAD, MASA_VL_SCHEDULED
 from ..models.questionnaire import Questionnaire
 from ..models.viral_load_tracking import ViralLoadTracking
-from bcpp_clinic_subject.tests.test_clinic_mixin import TestClinicMixin
+from .subject_helper import SubjectHelper
 
 
 @tag('rules')
-class TestRuleGroups(TestClinicMixin, TestCase):
+class TestRuleGroups(TestCase):
+
+    subject_helper = SubjectHelper()
 
     @tag('vl_required')
     def test_clinic_viral_load_required(self):
         """Assert viral load is required if registration type is INITIATION.
         """
-        subject_visit = self.complete_clinic_visit()
+        subject_visit = self.subject_helper.complete_clinic_visit()
         Questionnaire.objects.create(
             subject_visit=subject_visit,
             registration_type=INITIATION,
@@ -37,7 +39,7 @@ class TestRuleGroups(TestClinicMixin, TestCase):
     def test_clinic_viral_load_required1(self):
         """Assert viral load is required if registration type is OTHER.
         """
-        subject_visit = self.complete_clinic_visit()
+        subject_visit = self.subject_helper.complete_clinic_visit()
         Questionnaire.objects.create(
             subject_visit=subject_visit,
             registration_type=OTHER,
@@ -55,7 +57,7 @@ class TestRuleGroups(TestClinicMixin, TestCase):
     def test_clinic_viral_load_not_required(self):
         """Assert viral load not required if not initiation or other.
         """
-        subject_visit = self.complete_clinic_visit()
+        subject_visit = self.subject_helper.complete_clinic_visit()
         Questionnaire.objects.create(
             subject_visit=subject_visit,
             registration_type=MASA_VL_SCHEDULED,
@@ -74,7 +76,7 @@ class TestRuleGroups(TestClinicMixin, TestCase):
         """Assert viralloadtracking is required on registration type is
         MASA_VL_SCHEDULED.
         """
-        subject_visit = self.complete_clinic_visit()
+        subject_visit = self.subject_helper.complete_clinic_visit()
         Questionnaire.objects.create(
             subject_visit=subject_visit,
             registration_type=MASA_VL_SCHEDULED,
@@ -92,7 +94,7 @@ class TestRuleGroups(TestClinicMixin, TestCase):
     def test_clinic_vlloadtracking1(self):
         """Assert viralloadtracking not required if not MASA_VL_SCHEDULED.
         """
-        subject_visit = self.complete_clinic_visit()
+        subject_visit = self.subject_helper.complete_clinic_visit()
         Questionnaire.objects.create(
             subject_visit=subject_visit,
             registration_type=OTHER,
@@ -110,7 +112,7 @@ class TestRuleGroups(TestClinicMixin, TestCase):
     def test_clinic_vl_result(self):
         """Assert vlresult is required on is_drawn is YES.
         """
-        subject_visit = self.complete_clinic_visit()
+        subject_visit = self.subject_helper.complete_clinic_visit()
         ViralLoadTracking.objects.create(
             subject_visit=subject_visit,
             is_drawn=YES)
@@ -125,7 +127,7 @@ class TestRuleGroups(TestClinicMixin, TestCase):
     def test_clinic_vl_result1(self):
         """Assert vlresult not required on is_drawn is NO.
         """
-        subject_visit = self.complete_clinic_visit()
+        subject_visit = self.subject_helper.complete_clinic_visit()
         ViralLoadTracking.objects.create(
             subject_visit=subject_visit,
             is_drawn=NO)
@@ -140,7 +142,7 @@ class TestRuleGroups(TestClinicMixin, TestCase):
     def test_clinic_viral_load(self):
         """Assert viralload is required on is_drawn is NO.
         """
-        subject_visit = self.complete_clinic_visit()
+        subject_visit = self.subject_helper.complete_clinic_visit()
         ViralLoadTracking.objects.create(
             subject_visit=subject_visit,
             is_drawn=NO)
@@ -155,7 +157,7 @@ class TestRuleGroups(TestClinicMixin, TestCase):
     def test_clinic_viral_load1(self):
         """Assert viralload not required on is_drawn is YES.
         """
-        subject_visit = self.complete_clinic_visit()
+        subject_visit = self.subject_helper.complete_clinic_visit()
         ViralLoadTracking.objects.create(
             subject_visit=subject_visit,
             is_drawn=YES)
