@@ -32,7 +32,7 @@ SECRET_KEY = '*3izpxc9!j7)(a*2+_sw%_10gx*_$z1-%bf2mz%!pkd%@*%$1)'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-CONFIG_FILE = '{}.conf'.format(APP_NAME)
+CONFIG_FILE = f'{APP_NAME}.conf'
 if DEBUG:
     ETC_DIR = str(PurePath(BASE_DIR).joinpath('etc'))
 else:
@@ -40,7 +40,7 @@ else:
 ALLOWED_HOSTS = ['127.0.0.1', 'localhost']
 
 CONFIG_PATH = os.path.join(ETC_DIR, APP_NAME, CONFIG_FILE)
-sys.stdout.write(style.SUCCESS('Reading config from {}\n'.format(CONFIG_PATH)))
+sys.stdout.write(style.SUCCESS(f'Reading config from {CONFIG_PATH}\n'))
 
 config = configparser.RawConfigParser()
 config.read(os.path.join(CONFIG_PATH))
