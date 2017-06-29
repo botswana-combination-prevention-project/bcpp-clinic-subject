@@ -36,8 +36,8 @@ class QuestionnaireAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 "registration_type",
                 "know_hiv_status",
                 "current_hiv_status",
-                "arv_evidence",
                 "on_arv",
+                "arv_evidence",
                 "knows_last_cd4",
                 "cd4_count",)}),
         audit_fieldset_tuple)
