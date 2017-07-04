@@ -111,7 +111,7 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
             self.version)
 
     def save(self, *args, **kwargs):
-        self.registration_identifier = self.eligibility_identifier
+        self.registration_identifier = self.screening_identifier
         super().save(*args, **kwargs)
 
     class Meta(ConsentModelMixin.Meta):

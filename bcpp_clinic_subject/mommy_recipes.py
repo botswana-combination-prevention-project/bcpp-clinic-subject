@@ -27,7 +27,6 @@ subjectlocator = Recipe(
 
 subjectconsent = Recipe(
     SubjectConsent,
-    subject_identifier=None,
     study_site='40',
     consent_datetime=get_utcnow(),
     dob=(get_utcnow() - relativedelta(years=25)).date(),

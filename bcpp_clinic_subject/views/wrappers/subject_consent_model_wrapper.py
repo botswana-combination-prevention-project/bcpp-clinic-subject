@@ -10,4 +10,4 @@ class SubjectConsentModelWrapper(ModelWrapper):
         'bcpp_clinic_subject').dashboard_url_name
     next_url_attrs = ['subject_identifier', ]
     querystring_attrs = [
-        'gender', 'eligibility_identifier', 'first_name', 'initials', 'modified']
+        'gender', 'screening_identifier', 'first_name', 'initials', 'modified']

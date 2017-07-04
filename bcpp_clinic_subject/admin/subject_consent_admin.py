@@ -26,7 +26,7 @@ class SubjectConsentAdmin(ModelAdminConsentMixin, ModelAdminRevisionMixin,
     fieldsets = (
         (None, {
             'fields': (
-                'eligibility_identifier',
+                'screening_identifier',
                 'htc_identifier',
                 'lab_identifier',
                 'pims_identifier',

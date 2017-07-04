@@ -3,10 +3,10 @@ from django.db import models
 
 class SubjectConsentManager(models.Manager):
 
-    def get_by_natural_key(self, subject_identifier, eligibility_identifier):
+    def get_by_natural_key(self, subject_identifier, screening_identifier):
         return self.get(
             subject_identifier=subject_identifier,
-            eligibility_identifier=eligibility_identifier)
+            screening_identifier=screening_identifier)
 
 
 class DailyLogManager(models.Manager):

@@ -17,11 +17,11 @@ def subject_consent_on_post_save(sender, instance, raw, created, **kwargs):
         if created:
             try:
                 subject_eligibility = SubjectEligibility.objects.get(
-                    eligibility_identifier=instance.eligibility_identifier)
+                    screening_identifier=instance.screening_identifier)
             except SubjectEligibility.DoesNotExist:
                 raise ElibilityError(
                     "Consent can not exist without an eligibility.")
             else:
                 subject_eligibility.subject_identifier = instance.subject_identifier
                 subject_eligibility.save()
-                instance.update_or_create_enrollment(subject_eligibility)
+            instance.update_or_create_enrollment(subject_eligibility)

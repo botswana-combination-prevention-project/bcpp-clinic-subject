@@ -32,7 +32,7 @@ class TestWrappers(TestCase):
         model_obj = mommy.make_recipe(
             'bcpp_clinic_subject.subjectconsent',
             **options,
-            eligibility_identifier=subject_eligibility.eligibility_identifier)
+            screening_identifier=subject_eligibility.screening_identifier)
         wrapper = SubjectConsentModelWrapper(model_obj=model_obj)
         self.assertIn('change', wrapper.href)
 

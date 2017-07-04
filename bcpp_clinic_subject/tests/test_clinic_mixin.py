@@ -34,7 +34,7 @@ class TestClinicMixin:
             return eligibility
         subject_consent = mommy.make_recipe(
             'bcpp_clinic_subject.subjectconsent',
-            eligibility_identifier=make_eligibility().eligibility_identifier)
+            screening_identifier=make_eligibility().screening_identifier)
         appointment = Appointment.objects.get(
             subject_identifier=subject_consent.subject_identifier)
         return SubjectVisit.objects.create(
