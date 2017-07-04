@@ -12,7 +12,7 @@ schedule1 = Schedule(
     disenrollment_model='bcpp_clinic_subject.disenrollment',)
 
 visit0 = Visit(
-    code='C1',
+    code='C0',
     title='Clinic Subject Survey',
     timepoint=0,
     rbase=relativedelta(years=0),

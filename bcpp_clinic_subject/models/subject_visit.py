@@ -7,7 +7,9 @@ from edc_metadata.model_mixins.creates.creates_metadata_model_mixin import Creat
 from edc_visit_tracking.managers import VisitModelManager
 from edc_visit_tracking.model_mixins.visit_model_mixin import VisitModelMixin
 
+
 from ..choices import VISIT_UNSCHEDULED_REASON
+from ..constants import CLINIC_RBD
 from .appointment import Appointment
 
 
@@ -37,6 +39,8 @@ class SubjectVisit(VisitModelMixin, CreatesMetadataModelMixin,
 
     def save(self, *args, **kwargs):
         self.info_source = 'subject'
+        self.reason = CLINIC_RBD
+        self.appointment.appt_type = 'clinic'
         self.subject_identifier = self.appointment.subject_identifier
         super(SubjectVisit, self).save(*args, **kwargs)
 

@@ -29,8 +29,6 @@ class SubjectVisitAdmin(VisitModelAdminMixin, ModelAdminMixin, admin.ModelAdmin)
             'fields': [
                 'appointment',
                 'report_datetime',
-                'reason',
-                "info_source",
                 'comments']}),
         visit_schedule_fieldset_tuple,
         audit_fieldset_tuple)
