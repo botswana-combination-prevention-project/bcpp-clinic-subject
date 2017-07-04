@@ -6,8 +6,7 @@ from bcpp_clinic_screening.tests import ScreeningTestHelper
 
 from ..models import SubjectConsent
 from ..models.questionnaire import Questionnaire
-from ..views import SubjectConsentModelWrapper
-from ..views.wrappers.crf_model_wrapper import CrfModelWrapper
+from ..model_wrappers import SubjectConsentModelWrapper, CrfModelWrapper
 from .subject_helper import SubjectHelper
 
 
