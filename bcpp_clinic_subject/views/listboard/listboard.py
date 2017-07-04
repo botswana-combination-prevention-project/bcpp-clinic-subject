@@ -5,7 +5,7 @@ from django.db.models import Q
 from django.utils.decorators import method_decorator
 
 from ...models import SubjectConsent
-from ..wrappers import SubjectConsentModelWrapper
+from ...model_wrappers import SubjectConsentModelWrapper
 from .base_listboard import BaseListboardView
 
 

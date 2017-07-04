@@ -2,7 +2,7 @@ from django.apps import apps as django_apps
 
 from edc_model_wrapper import ModelWrapper
 
-from ...models import SubjectVisit
+from ..models import SubjectVisit
 
 
 class SubjectVisitModelWrapper(ModelWrapper):

@@ -7,7 +7,7 @@ from edc_dashboard.view_mixins import (
     DashboardViewMixin as EdcDashboardViewMixin, AppConfigViewMixin)
 
 from ....models import SubjectConsent, SubjectOffstudy
-from ...wrappers import (
+from ....model_wrappers import (
     CrfModelWrapper, SubjectVisitModelWrapper, RequisitionModelWrapper,
     SubjectConsentModelWrapper)
 from .base_dashboard_view import BaseDashboardView
