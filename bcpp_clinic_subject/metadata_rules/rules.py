@@ -29,11 +29,9 @@ class QuestionnaireRuleGroup(RuleGroup):
         target_panels=[panel_vl],)
 
     viralloadtracking = CrfRule(
-        logic=Logic(
-            predicate=P(
-                'registration_type', 'eq', MASA_VL_SCHEDULED),
-            consequence=REQUIRED,
-            alternative=NOT_REQUIRED),
+        predicate=P('registration_type', 'eq', MASA_VL_SCHEDULED),
+        consequence=REQUIRED,
+        alternative=NOT_REQUIRED,
         target_models=['bcpp_clinic_subject.viralloadtracking'])
 
     class Meta:
@@ -45,10 +43,9 @@ class QuestionnaireRuleGroup(RuleGroup):
 class ViralLoadTrackingRuleGroup(RuleGroup):
 
     is_drawn = CrfRule(
-        logic=Logic(
-            predicate=P('is_drawn', 'eq', YES),
-            consequence=REQUIRED,
-            alternative=NOT_REQUIRED),
+        predicate=P('is_drawn', 'eq', YES),
+        consequence=REQUIRED,
+        alternative=NOT_REQUIRED,
         target_models=['bcpp_clinic_subject.vlresult'])
 
     not_drawn = RequisitionRule(
