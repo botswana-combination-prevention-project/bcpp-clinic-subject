@@ -13,10 +13,10 @@ class TestSubjectConsent(TestCase):
     screening_test_helper = ScreeningTestHelper()
 
     def test_create_consent_updates_registered_subject(self):
-        """Test creating consent creates updates a registered subject.
+        """Test consent updates a registered subject.
         """
-        self.assertEqual(RegisteredSubject.objects.all().count(), 1)
         subject_eligibility = self.screening_test_helper.make_eligibility()
+        self.assertEqual(RegisteredSubject.objects.all().count(), 1)
         self.assertEqual(
             RegisteredSubject.objects.first().registration_identifier,
             subject_eligibility.screening_identifier)

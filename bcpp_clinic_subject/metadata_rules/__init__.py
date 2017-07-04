@@ -1,1 +1,2 @@
-from .rules import QuestionnaireRuleGroup, ViralLoadTrackingRuleGroup
+from .rules import (ViralLoadTrackingRequisitionRuleGroup, ViralLoadTrackingCrfRuleGroup,
+                    QuestionnaireRequisitionRuleGroup, QuestionnaireCrfRuleGroup)
