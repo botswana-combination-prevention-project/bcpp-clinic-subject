@@ -21,6 +21,7 @@ install:
   - pip3 install -q Django==$DJANGO_VERSION
   - pip3 install flake8
   - pip3 install coveralls
+  - sudo apt-get install libcups2-dev
   - pip install pycups
   - pip3 install mysqlclient
   - pip3 install -q -r requirements.txt
