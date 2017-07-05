@@ -2,7 +2,7 @@ from edc_map.mapper import Mapper
 from edc_map.site_mappers import site_mappers
 
 
-class TestPlotMapper(Mapper):
+class SubjectTestPlotMapper(Mapper):
 
     map_area = 'subject_test_community'
     map_code = '41'
@@ -17,4 +17,4 @@ class TestPlotMapper(Mapper):
     intervention = True
 
 
-site_mappers.register(TestPlotMapper)
+site_mappers.register(SubjectTestPlotMapper)
