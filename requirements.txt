@@ -26,3 +26,4 @@ git+https://github.com/botswana-harvard/edc-locator.git
 git+https://github.com/botswana-harvard/edc-offstudy.git
 git+https://github.com/erikvw/django-revision.git
 git+https://github.com/erikvw/django-crypto-fields.git
+git+https://github.com/botswana-harvard/edc-map.git

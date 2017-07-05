@@ -9,10 +9,11 @@ from edc_consent.consent import Consent
 from edc_consent.site_consents import site_consents
 from edc_constants.constants import MALE, FEMALE
 
-from bcpp_clinic_screening.models.subject_eligibility import SubjectEligibility
-from bcpp_clinic_subject.models.subject_consent import SubjectConsent
-from bcpp_clinic_subject.models.subject_visit import SubjectVisit
-from bcpp_clinic_subject.tests.subject_helper import SubjectHelper
+from bcpp_clinic_screening.models import SubjectEligibility
+
+from ..models.subject_consent import SubjectConsent
+from ..models.subject_visit import SubjectVisit
+from ..tests.subject_helper import SubjectHelper
 
 tzinfo = gettz('Africa/Gaborone')
 

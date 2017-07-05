@@ -66,6 +66,7 @@ INSTALLED_APPS = [
     'edc_registration.apps.AppConfig',
     'edc_visit_schedule.apps.AppConfig',
     'edc_offstudy.apps.AppConfig',
+    'edc_map.apps.AppConfig',
     'bcpp_clinic_subject.apps.EdcIdentifierAppConfig',
     'bcpp_clinic_subject.apps.EdcDeviceAppConfig',
     'bcpp_clinic_subject.apps.EdcProtocolAppConfig',
@@ -87,6 +88,7 @@ if 'test' in sys.argv:
         'bcpp_clinic_screening': None,
         'edc_sync': None,
         'edc_metadata': None,
+        'edc_map': None,
         'edc_timepoint': None,
         "edc_sync": None,
         'edc_sync_files': None,
@@ -195,7 +197,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 KEY_PATH = os.path.join(BASE_DIR, 'crypto_fields')
 GIT_DIR = BASE_DIR
 
-CURRENT_MAP_AREA = 'test_community'
+CURRENT_MAP_AREA = 'subject_test_community'
 DEVICE_ID = '21'
 DEVICE_ROLE = 'Client'
 LABEL_PRINTER = 'label_printer'
