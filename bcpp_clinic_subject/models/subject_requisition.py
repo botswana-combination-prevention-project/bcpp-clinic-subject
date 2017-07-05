@@ -7,6 +7,7 @@ from edc_lab.model_mixins.requisition import (
     RequisitionModelMixin, RequisitionStatusMixin, RequisitionIdentifierMixin)
 from edc_metadata.model_mixins.updates import UpdatesRequisitionMetadataModelMixin
 from edc_offstudy.model_mixins import OffstudyMixin
+from edc_map.site_mappers import site_mappers
 from edc_visit_tracking.managers import (
     CrfModelManager as VisitTrackingCrfModelManager)
 from edc_visit_tracking.model_mixins import (
@@ -31,6 +32,11 @@ class SubjectRequisition(
     subject_visit = models.ForeignKey(SubjectVisit, on_delete=PROTECT)
 
     objects = Manager()
+
+    def save(self, *args, **kwargs):
+        self.study_site = site_mappers.current_map_code
+        self.study_site_name = site_mappers.current_map_area
+        super().save(*args, **kwargs)
 
     def get_slugs(self):
         return ([self.subject_visit.subject_identifier,
