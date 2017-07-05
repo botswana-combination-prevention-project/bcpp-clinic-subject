@@ -20,8 +20,7 @@ install:
   - pip install --upgrade pip setuptools
   - pip install -q Django==$DJANGO_VERSION
   - pip install flake8
-  - sudo apt-get install python-dev
-  - pip install pycups
+  - pip install pycups==1.9.73
   - pip install coveralls
   - pip install mysqlclient
   - pip install -q -r requirements.txt
