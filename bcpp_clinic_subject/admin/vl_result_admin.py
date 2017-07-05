@@ -24,6 +24,10 @@ class VlResultAdmin(CrfModelAdminMixin, admin.ModelAdmin):
         'validation_datetime',
         'validated_by')
 
+    radio_fields = {
+        'study_site': admin.VERTICAL,
+    }
+
     list_display = ('subject_visit', 'clinician_initials',
                     'collection_datetime', 'result_value', 'validated_by')
 
