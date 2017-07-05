@@ -5,7 +5,7 @@ from edc_base.model_managers import HistoricalRecords
 from edc_base.model_fields import InitialsField
 
 from .crf_model_mixin import CrfModelMixin
-from ..choices import COMMUNITIES
+from ..choices import COMMUNITIES_NAMES
 
 
 class VlResult(CrfModelMixin):
@@ -19,7 +19,7 @@ class VlResult(CrfModelMixin):
 
     study_site = models.CharField(
         max_length=10,
-        choices=COMMUNITIES)
+        choices=COMMUNITIES_NAMES)
 
     clinician_initials = InitialsField(
         verbose_name='Clinician initial',
