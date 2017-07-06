@@ -56,6 +56,7 @@ class EdcDeviceAppConfig(BaseEdcDeviceAppConfig):
 
 class EdcMapAppConfig(BaseEdcMapAppConfig):
     verbose_name = 'BCPP Mappers'
+    mapper_model = 'bcpp_clinic_screening.subjecteligibility'
 
 
 class EdcProtocolAppConfig(BaseEdcProtocolAppConfig):
