@@ -197,7 +197,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 KEY_PATH = os.path.join(BASE_DIR, 'crypto_fields')
 GIT_DIR = BASE_DIR
 
-CURRENT_MAP_AREA = 'test_community'
+CURRENT_MAP_AREA = 'subject_test_community'
 DEVICE_ID = '21'
 DEVICE_ROLE = 'Client'
 LABEL_PRINTER = 'label_printer'
