@@ -1,6 +1,5 @@
-from django.db import models
 from django.core.validators import MaxValueValidator, MinValueValidator
-
+from django.db import models
 from edc_base.model_fields.custom_fields import OtherCharField
 from edc_constants.choices import YES_NO_DWTA, YES_NO_NA, POS_NEG_UNKNOWN
 
@@ -21,7 +20,7 @@ class Questionnaire(CrfModelMixin):
     registration_type_other = OtherCharField()
 
     know_hiv_status = models.CharField(
-        verbose_name="Do you know you HIV status?",
+        verbose_name="Do you know your HIV status?",
         max_length=25,
         choices=YES_NO_DWTA,
     )
