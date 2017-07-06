@@ -66,7 +66,7 @@ INSTALLED_APPS = [
     'edc_registration.apps.AppConfig',
     'edc_visit_schedule.apps.AppConfig',
     'edc_offstudy.apps.AppConfig',
-    'edc_map.apps.AppConfig',
+    'bcpp_clinic_subject.apps.EdcMapAppConfig',
     'bcpp_clinic_subject.apps.EdcIdentifierAppConfig',
     'bcpp_clinic_subject.apps.EdcDeviceAppConfig',
     'bcpp_clinic_subject.apps.EdcProtocolAppConfig',
