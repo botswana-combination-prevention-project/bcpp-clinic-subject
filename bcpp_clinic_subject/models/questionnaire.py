@@ -1,7 +1,8 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from django.template.defaultfilters import default
 from edc_base.model_fields.custom_fields import OtherCharField
-from edc_constants.choices import YES_NO_DWTA, YES_NO_NA, POS_NEG_UNKNOWN
+from edc_constants.choices import YES_NO_DWTA, YES_NO_NA, POS_NEG_UNKNOWN, UNKNOWN, YES_NO_NA_DWTA
 
 from ..choices import REGISTRATION_TYPES
 from ..models.crf_model_mixin import CrfModelMixin
@@ -23,6 +24,7 @@ class Questionnaire(CrfModelMixin):
         verbose_name="Do you know your HIV status?",
         max_length=25,
         choices=YES_NO_DWTA,
+        null=True,
     )
 
     current_hiv_status = models.CharField(
@@ -30,20 +32,22 @@ class Questionnaire(CrfModelMixin):
         max_length=25,
         choices=POS_NEG_UNKNOWN,
         null=True,
-        blank=True,
+        default=UNKNOWN,
     )
 
     on_arv = models.CharField(
         verbose_name="Are you currently taking antiretroviral therapy (ARVs)?",
         max_length=25,
-        choices=YES_NO_DWTA,
+        choices=YES_NO_NA_DWTA,
         help_text="",
+        null=True,
     )
 
     arv_evidence = models.CharField(
         verbose_name="Do you have evidence of the antiretroviral therapy ARVs you're taking?",
         max_length=25,
-        choices=YES_NO_NA
+        choices=YES_NO_NA,
+        null=True,
     )
 
     knows_last_cd4 = models.CharField(
@@ -51,6 +55,7 @@ class Questionnaire(CrfModelMixin):
         max_length=25,
         choices=YES_NO_DWTA,
         help_text="",
+        null=True,
     )
 
     cd4_count = models.DecimalField(
