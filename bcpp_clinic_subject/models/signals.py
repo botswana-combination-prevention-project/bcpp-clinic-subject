@@ -1,8 +1,8 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from bcpp_clinic_screening.exceptions import ElibilityError
 from bcpp_clinic_screening.models import SubjectEligibility
+from edc_consent.exceptions import ConsentError
 
 from .subject_consent import SubjectConsent
 
@@ -19,7 +19,7 @@ def subject_consent_on_post_save(sender, instance, raw, created, **kwargs):
                 subject_eligibility = SubjectEligibility.objects.get(
                     screening_identifier=instance.screening_identifier)
             except SubjectEligibility.DoesNotExist:
-                raise ElibilityError(
+                raise ConsentError(
                     "Consent can not exist without an eligibility.")
             else:
                 subject_eligibility.subject_identifier = instance.subject_identifier

@@ -3,11 +3,9 @@ from edc_lab.lab.processing_profile import Process
 from edc_lab.site_labs import site_labs
 
 from .constants import VIRAL_LOAD, RESEARCH_BLOOD_DRAW
-from .models.subject_requisition import SubjectRequisition
 
 lab_profile = LabProfile(
-    name='bcpp_clinic_subject',
-    requisition_model=SubjectRequisition)
+    name='bcpp_clinic_subject')
 
 wb = AliquotType(name='Whole Blood', alpha_code='WB', numeric_code='02')
 bc = AliquotType(name='Buffy Coat', alpha_code='BC', numeric_code='16')
@@ -28,13 +26,11 @@ processing_profile.add_processes(process_rbd_bc, process_rbd_pl)
 
 panel_vl = RequisitionPanel(
     name=VIRAL_LOAD,
-    model=SubjectRequisition,
     aliquot_type=wb,
     processing_profile=processing_profile)
 
 panel_rbd = RequisitionPanel(
     name=RESEARCH_BLOOD_DRAW,
-    model=SubjectRequisition,
     aliquot_type=wb,
     abbreviation='RBD',
     processing_profile=processing_profile)
@@ -42,4 +38,5 @@ panel_rbd = RequisitionPanel(
 lab_profile.add_panel(panel_vl)
 lab_profile.add_panel(panel_rbd)
 
-site_labs.register(lab_profile)
+site_labs.register(
+    lab_profile, requisition_model='bcpp_clinic_subject.subjectrequisition')
