@@ -3,8 +3,11 @@ from django.urls.base import reverse
 from django.urls.exceptions import NoReverseMatch
 
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
-from edc_base.modeladmin_mixins import ModelAdminInstitutionMixin
-from edc_base.modeladmin_mixins import ModelAdminNextUrlRedirectMixin
+from edc_base.modeladmin_mixins import (
+    ModelAdminInstitutionMixin, ModelAdminNextUrlRedirectMixin,
+    ModelAdminFormInstructionsMixin, ModelAdminFormAutoNumberMixin,
+    ModelAdminAuditFieldsMixin, ModelAdminReadOnlyMixin,
+    ModelAdminNextUrlRedirectError)
 from edc_consent.modeladmin_mixins import ModelAdminConsentMixin
 
 from edc_base.modeladmin_mixins import (
@@ -15,10 +18,33 @@ from ..forms import SubjectConsentForm
 from ..models import SubjectConsent
 
 
+class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructionsMixin,
+                      ModelAdminFormAutoNumberMixin, ModelAdminRevisionMixin,
+                      ModelAdminAuditFieldsMixin, ModelAdminReadOnlyMixin,
+                      ModelAdminInstitutionMixin):
+
+    list_per_page = 10
+    date_hierarchy = 'modified'
+    empty_value_display = '-'
+
+    def redirect_url(self, request, obj, post_url_continue=None):
+        redirect_url = super().redirect_url(
+            request, obj, post_url_continue=post_url_continue)
+        if request.GET.dict().get('next'):
+            url_name = request.GET.dict().get('next').split(',')[0]
+            attrs = request.GET.dict().get('next').split(',')[1:]
+            options = {k: request.GET.dict().get(k)
+                       for k in attrs if request.GET.dict().get(k)}
+            options.update(subject_identifier=obj.subject_identifier)
+            try:
+                redirect_url = reverse(url_name, kwargs=options)
+            except NoReverseMatch as e:
+                raise ModelAdminNextUrlRedirectError(f'{e}. Got url_name={url_name}, kwargs={options}.')
+        return redirect_url
+
+
 @admin.register(SubjectConsent, site=bcpp_clinic_subject_admin)
-class SubjectConsentAdmin(ModelAdminConsentMixin, ModelAdminRevisionMixin,
-                          ModelAdminInstitutionMixin,
-                          ModelAdminNextUrlRedirectMixin, admin.ModelAdmin):
+class SubjectConsentAdmin(ModelAdminConsentMixin, ModelAdminMixin, admin.ModelAdmin):
 
     dashboard_type = 'clinic'
     form = SubjectConsentForm

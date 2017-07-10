@@ -17,7 +17,8 @@ class SubjectConsentModelWrapper(ModelWrapper):
     @property
     def map_area(self):
         try:
-            subject_eligibility = SubjectEligibility.objects.get()
+            subject_eligibility = SubjectEligibility.objects.get(
+                screening_identifier=self.object.screening_identifier)
         except SubjectEligibility.DoesNotExist:
             raise ConsentError(
                 'Missing subject eligibility with identifier '
