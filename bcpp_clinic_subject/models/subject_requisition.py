@@ -1,3 +1,4 @@
+from django.apps import apps as django_apps
 from django.db import models
 from django.db.models.deletion import PROTECT
 
@@ -36,6 +37,8 @@ class SubjectRequisition(
     def save(self, *args, **kwargs):
         self.study_site = site_mappers.current_map_code
         self.study_site_name = site_mappers.current_map_area
+        self.protocol_number = django_apps.get_app_config(
+            'edc_protocol').protocol_number
         super().save(*args, **kwargs)
 
     def get_slugs(self):
