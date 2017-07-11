@@ -41,22 +41,12 @@ class TestMixin(TestCase):
     subject_helper = SubjectHelper()
 
     def test_subject_eligibility(self):
-        """ Assert eligible subject eligibility.
+        """ Assert eligible subject eligibility, consent and visit completed.
         """
         self.subject_helper.complete_clinic_visit()
         self.assertEqual(
             SubjectEligibility.objects.filter(is_eligible=True).count(), 1)
-
-    def test_subject_consent(self):
-        """ Assert subject consent is completed.
-        """
-        self.subject_helper.complete_clinic_visit()
         self.assertEqual(
             SubjectConsent.objects.all().count(), 1)
-
-    def test_subject_visit(self):
-        """ Assert subject visit is completed.
-        """
-        self.subject_helper.complete_clinic_visit()
         self.assertEqual(
             SubjectVisit.objects.all().count(), 1)
