@@ -14,8 +14,10 @@ from edc_protocol.validators import datetime_not_before_study_start
 
 from edc_visit_tracking.model_mixins import (
     CrfModelMixin as VisitTrackingCrfModelMixin, PreviousVisitModelMixin)
+from edc_reference.model_mixins import ReferenceModelMixin
 
-from edc_consent.model_mixins import RequiresConsentMixin as BaseRequiresConsentMixin
+from edc_consent.model_mixins import (
+    RequiresConsentMixin as BaseRequiresConsentMixin)
 
 from .subject_visit import SubjectVisit
 
@@ -23,7 +25,7 @@ from .subject_visit import SubjectVisit
 class CrfModelMixin(VisitTrackingCrfModelMixin, OffstudyMixin,
                     BaseRequiresConsentMixin, PreviousVisitModelMixin,
                     UpdatesCrfMetadataModelMixin,
-                    FormAsJSONModelMixin, BaseUuidModel):
+                    FormAsJSONModelMixin, ReferenceModelMixin, BaseUuidModel):
 
     """ Base model for all scheduled models (adds key to :class:`SubjectVisit`).
     """
