@@ -1,4 +1,4 @@
-from bcpp_clinic_validations.form_validators import SubjectLocatorFormValidator
+from django import forms
 
 from ..models import SubjectLocator
 from .modelform_mixin import SubjectModelFormMixin
@@ -6,11 +6,9 @@ from .modelform_mixin import SubjectModelFormMixin
 
 class SubjectLocatorForm (SubjectModelFormMixin):
 
-    def clean(self):
-        cleaned_data = super().clean()
-        cleaned_data = SubjectLocatorFormValidator(
-            cleaned_data=cleaned_data).clean()
-        return cleaned_data
+    subject_identifier = forms.CharField(
+        label='Subject identifier',
+        widget=forms.TextInput(attrs={'readonly': 'readonly'}))
 
     class Meta:
         model = SubjectLocator

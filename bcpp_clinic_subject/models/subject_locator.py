@@ -74,8 +74,9 @@ class SubjectLocator(LocatorModelMixin, RequiresConsentMixin, BaseUuidModel):
     )
 
     def __str__(self):
-        return self.subject_visit
+        return self.subject_identifier
 
-    class Meta:
+    class Meta(RequiresConsentMixin.Meta):
         verbose_name = "Clinic Subject Locator"
         verbose_name_plural = "Clinic Subject Locator"
+        consent_model = 'bcpp_clinic_subject.subjectconsent'

@@ -28,3 +28,7 @@ class ViralLoadTrackingAdmin(CrfModelAdminMixin, admin.ModelAdmin):
                 "drawn_datetime",
                 "clinician_initials",)}),
         audit_fieldset_tuple)
+
+    radio_fields = {
+        'is_drawn': admin.VERTICAL,
+        'reason_not_drawn': admin.VERTICAL}
