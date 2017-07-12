@@ -11,4 +11,6 @@ from .subject_requisition import SubjectRequisition
 from .subject_visit import SubjectVisit
 from .viral_load_tracking import ViralLoadTracking
 from .vl_result import VlResult
+from .result.result import Result
+from .result.result_item import ResultItem
 from .signals import subject_consent_on_post_save

@@ -38,7 +38,7 @@ class Questionnaire(CrfModelMixin):
     on_arv = models.CharField(
         verbose_name="Are you currently taking antiretroviral therapy (ARVs)?",
         max_length=25,
-        choices=YES_NO_NA_DWTA,
+        choices=YES_NO_DWTA,
         help_text="",
         null=True,
     )
@@ -46,7 +46,7 @@ class Questionnaire(CrfModelMixin):
     arv_evidence = models.CharField(
         verbose_name="Do you have evidence of the antiretroviral therapy ARVs you're taking?",
         max_length=25,
-        choices=YES_NO_NA,
+        choices=YES_NO_DWTA,
         null=True,
     )
 
