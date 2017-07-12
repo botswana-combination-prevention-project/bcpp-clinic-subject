@@ -18,7 +18,7 @@ class VlResult(CrfModelMixin):
         editable=False)
 
     study_site = models.CharField(
-        max_length=10,
+        max_length=25,
         choices=COMMUNITIES_NAMES)
 
     clinician_initials = InitialsField(
