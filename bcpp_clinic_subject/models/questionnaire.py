@@ -1,6 +1,6 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
-from edc_constants.choices import YES_NO_DWTA, YES_NO_NA, YES_NO_NA_DWTA
+from edc_constants.choices import YES_NO_DWTA, YES_NO_NA_DWTA
 
 from bcpp_clinic_screening.choices import VERBALHIVRESULT_CHOICE
 from edc_base.model_fields.custom_fields import OtherCharField
@@ -46,7 +46,7 @@ class Questionnaire(CrfModelMixin):
     arv_evidence = models.CharField(
         verbose_name="Do you have evidence of the antiretroviral therapy ARVs you're taking?",
         max_length=25,
-        choices=YES_NO_DWTA,
+        choices=YES_NO_NA_DWTA,
         null=True,
     )
 
