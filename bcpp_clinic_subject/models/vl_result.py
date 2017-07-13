@@ -1,5 +1,3 @@
-from uuid import uuid4
-
 from django_crypto_fields.fields import EncryptedCharField
 from django.db import models
 
@@ -13,12 +11,12 @@ from ..choices import COMMUNITIES_NAMES
 class VlResult(CrfModelMixin):
 
     sample_id = models.CharField(
-        verbose_name='Aliquot Identifier',
+        verbose_name='Sample Identifier',
         max_length=25,
-        default=uuid4,
-        unique=True,
-        help_text="Aliquot identifier",
-        editable=False)
+        blank=True,
+        null=True,
+        help_text="Sample identifier"
+    )
 
     study_site = models.CharField(
         max_length=25,
@@ -63,6 +61,8 @@ class VlResult(CrfModelMixin):
     validation_datetime = models.DateTimeField(
         verbose_name='Datetime result was reported',
         help_text='',
+        blank=True,
+        null=True,
     )
 
     assay_performed_by = EncryptedCharField(
@@ -78,7 +78,6 @@ class VlResult(CrfModelMixin):
     validation_reference = models.CharField(
         verbose_name='Validation reference',
         max_length=25,
-        unique=True,
         help_text="Validation reference",
     )
 

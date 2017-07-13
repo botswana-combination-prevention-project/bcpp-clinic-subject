@@ -12,6 +12,7 @@ class VlResultAdmin(CrfModelAdminMixin, admin.ModelAdmin):
     form = VlResultForm
     fields = (
         'subject_visit',
+        'sample_id',
         'report_datetime',
         'study_site',
         'clinician_initials',
