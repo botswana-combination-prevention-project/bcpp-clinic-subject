@@ -1,3 +1,5 @@
+from uuid import uuid4
+
 from django_crypto_fields.fields import EncryptedCharField
 from django.db import models
 
@@ -13,6 +15,7 @@ class VlResult(CrfModelMixin):
     sample_id = models.CharField(
         verbose_name='Aliquot Identifier',
         max_length=25,
+        default=uuid4,
         unique=True,
         help_text="Aliquot identifier",
         editable=False)
