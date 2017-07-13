@@ -10,10 +10,6 @@ from ..constants import INITIATION, MASA_VL_SCHEDULED
 from ..labs import panel_vl
 
 
-def func_requires_venous(visit_instance, *args):
-    return True
-
-
 @register()
 class QuestionnaireCrfRuleGroup(CrfRuleGroup):
 
