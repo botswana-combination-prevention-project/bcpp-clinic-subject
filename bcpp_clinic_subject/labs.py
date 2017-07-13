@@ -2,7 +2,7 @@ from edc_lab import AliquotType, LabProfile, ProcessingProfile, RequisitionPanel
 from edc_lab.lab.processing_profile import Process
 from edc_lab.site_labs import site_labs
 
-from .constants import VIRAL_LOAD, RESEARCH_BLOOD_DRAW
+from .constants import CLINIC_VIRAL_LOAD, RESEARCH_BLOOD_DRAW
 
 lab_profile = LabProfile(
     name='bcpp_clinic_subject')
@@ -26,7 +26,7 @@ processing_profile.add_processes(process_rbd_bc, process_rbd_pl)
 
 
 panel_vl = RequisitionPanel(
-    name=VIRAL_LOAD,
+    name=CLINIC_VIRAL_LOAD,
     aliquot_type=wb,
     processing_profile=processing_profile)
 

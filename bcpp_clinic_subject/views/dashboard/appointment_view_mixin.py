@@ -1,5 +1,5 @@
 from edc_appointment.models import Appointment
-from edc_dashboard.view_mixins.subject_dashboard import (
+from edc_appointment.view_mixins.appointment_view_mixin import (
     AppointmentViewMixin as BaseAppointmentMixin)
 
 from ...model_wrappers import AppointmentModelWrapper

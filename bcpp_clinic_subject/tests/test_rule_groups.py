@@ -6,7 +6,7 @@ from edc_metadata.constants import REQUIRED, NOT_REQUIRED
 from edc_metadata.models import RequisitionMetadata, CrfMetadata
 
 
-from ..constants import INITIATION, VIRAL_LOAD, MASA_VL_SCHEDULED
+from ..constants import INITIATION, CLINIC_VIRAL_LOAD, MASA_VL_SCHEDULED
 from ..models.questionnaire import Questionnaire
 from ..models.viral_load_tracking import ViralLoadTracking
 from .subject_helper import SubjectHelper
@@ -33,7 +33,7 @@ class TestRuleGroups(TestCase):
 
         reqs = RequisitionMetadata.objects.filter(
             subject_identifier=self.subject_visit.subject_identifier,
-            panel_name=VIRAL_LOAD,
+            panel_name=CLINIC_VIRAL_LOAD,
             entry_status=REQUIRED)
         self.assertEqual(reqs.count(), 1)
 
@@ -50,7 +50,7 @@ class TestRuleGroups(TestCase):
 
         reqs = RequisitionMetadata.objects.filter(
             subject_identifier=self.subject_visit.subject_identifier,
-            panel_name=VIRAL_LOAD,
+            panel_name=CLINIC_VIRAL_LOAD,
             entry_status=REQUIRED)
         self.assertEqual(reqs.count(), 1)
 
@@ -67,7 +67,7 @@ class TestRuleGroups(TestCase):
 
         reqs = RequisitionMetadata.objects.filter(
             subject_identifier=self.subject_visit.subject_identifier,
-            panel_name=VIRAL_LOAD,
+            panel_name=CLINIC_VIRAL_LOAD,
             entry_status=NOT_REQUIRED)
         self.assertEqual(reqs.count(), 1)
 
@@ -135,22 +135,8 @@ class TestRuleGroups(TestCase):
         self.assertEqual(crf.count(), 1)
 
     @tag('viralload')
-    def test_clinic_viral_load(self):
-        """Assert viralload is required on is_drawn is NO.
-        """
-        ViralLoadTracking.objects.create(
-            subject_visit=self.subject_visit,
-            is_drawn=NO)
-
-        reqs = RequisitionMetadata.objects.filter(
-            subject_identifier=self.subject_visit.subject_identifier,
-            panel_name=VIRAL_LOAD,
-            entry_status=REQUIRED)
-        self.assertEqual(reqs.count(), 1)
-
-    @tag('viralload')
     def test_clinic_viral_load1(self):
-        """Assert viralload not required on is_drawn is YES.
+        """Assert viralload required on is_drawn is YES.
         """
         ViralLoadTracking.objects.create(
             subject_visit=self.subject_visit,
@@ -158,6 +144,6 @@ class TestRuleGroups(TestCase):
 
         reqs = RequisitionMetadata.objects.filter(
             subject_identifier=self.subject_visit.subject_identifier,
-            panel_name=VIRAL_LOAD,
-            entry_status=NOT_REQUIRED)
+            panel_name=CLINIC_VIRAL_LOAD,
+            entry_status=REQUIRED)
         self.assertEqual(reqs.count(), 1)

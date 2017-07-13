@@ -22,7 +22,6 @@ class ViralLoadTracking(CrfModelMixin):
         max_length=25,
         choices=REASON_NOT_DRAWN,
         null=True,
-        blank=True,
     )
 
     drawn_datetime = models.DateTimeField(

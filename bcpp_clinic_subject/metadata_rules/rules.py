@@ -42,21 +42,6 @@ class QuestionnaireRequisitionRuleGroup(RequisitionRuleGroup):
 
 
 @register()
-class ViralLoadTrackingRequisitionRuleGroup(RequisitionRuleGroup):
-
-    not_drawn = RequisitionRule(
-        predicate=P('is_drawn', 'eq', NO),
-        consequence=REQUIRED,
-        alternative=NOT_REQUIRED,
-        target_panels=[panel_vl])
-
-    class Meta:
-        app_label = 'bcpp_clinic_subject'
-        source_model = 'bcpp_clinic_subject.viralloadtracking'
-        requisition_model = 'subjectrequisition'
-
-
-@register()
 class ViralLoadTrackingCrfRuleGroup(CrfRuleGroup):
 
     is_drawn = CrfRule(
