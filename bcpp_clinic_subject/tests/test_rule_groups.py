@@ -142,8 +142,8 @@ class TestRuleGroups(TestCase):
             subject_visit=self.subject_visit,
             is_drawn=YES)
 
-        reqs = RequisitionMetadata.objects.filter(
+        crf = CrfMetadata.objects.filter(
             subject_identifier=self.subject_visit.subject_identifier,
-            panel_name=CLINIC_VIRAL_LOAD,
+            model='bcpp_clinic_subject.vlresult',
             entry_status=REQUIRED)
-        self.assertEqual(reqs.count(), 1)
+        self.assertEqual(crf.count(), 1)
