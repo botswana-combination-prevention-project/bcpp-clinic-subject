@@ -6,7 +6,8 @@ from edc_metadata.constants import REQUIRED, NOT_REQUIRED
 from edc_metadata.models import RequisitionMetadata, CrfMetadata
 
 
-from ..constants import INITIATION, CLINIC_VIRAL_LOAD, MASA_VL_SCHEDULED
+from ..constants import (
+    INITIATION, CLINIC_VIRAL_LOAD, MASA_VL_SCHEDULED, RESEARCH_BLOOD_DRAW)
 from ..models.questionnaire import Questionnaire
 from ..models.viral_load_tracking import ViralLoadTracking
 from .subject_helper import SubjectHelper
@@ -69,6 +70,22 @@ class TestRuleGroups(TestCase):
             subject_identifier=self.subject_visit.subject_identifier,
             panel_name=CLINIC_VIRAL_LOAD,
             entry_status=NOT_REQUIRED)
+        self.assertEqual(reqs.count(), 1)
+
+    def test_clinic_rbd_required(self):
+        """Assert viral load not required if not initiation or other.
+        """
+        Questionnaire.objects.create(
+            subject_visit=self.subject_visit,
+            registration_type=MASA_VL_SCHEDULED,
+            know_hiv_status=YES,
+            current_hiv_status=POS,
+            arv_evidence=YES)
+
+        reqs = RequisitionMetadata.objects.filter(
+            subject_identifier=self.subject_visit.subject_identifier,
+            panel_name=RESEARCH_BLOOD_DRAW,
+            entry_status=REQUIRED)
         self.assertEqual(reqs.count(), 1)
 
     @tag('vl_tracking')

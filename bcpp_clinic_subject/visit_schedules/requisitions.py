@@ -6,8 +6,8 @@ from ..labs import panel_rbd, panel_vl
 requisitions = (
     Requisition(
         show_order=10, model='bcpp_clinic_subject.subjectrequisition',
-        panel=panel_rbd),
+        panel=panel_rbd, required=True),
     Requisition(
         show_order=20, model='bcpp_clinic_subject.subjectrequisition',
-        panel=panel_vl),
+        panel=panel_vl, required=True),
 )
