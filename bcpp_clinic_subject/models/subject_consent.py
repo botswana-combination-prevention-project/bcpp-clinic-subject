@@ -1,6 +1,5 @@
-from django.apps import apps as django_apps
-from django.core.exceptions import ObjectDoesNotExist
 from django.db import models
+from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins.base_uuid_model import BaseUuidModel
 from edc_consent.field_mixins import CitizenFieldsMixin
 from edc_consent.field_mixins import PersonalFieldsMixin
@@ -12,10 +11,10 @@ from edc_consent.model_mixins import ConsentModelMixin
 from edc_constants.choices import YES_NO
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 from bcpp_clinic_screening.models import UpdatesOrCreatesRegistrationModelMixin
+from edc_search.model_mixins import SearchSlugModelMixin
 
 from ..eligibility_verifier import EligibilityVerifier
 from ..managers import SubjectConsentManager
-from .model_mixins import SearchSlugModelMixin
 
 
 class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
@@ -83,6 +82,8 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
 
     objects = SubjectConsentManager()
 
+    history = HistoricalRecords()
+
     def natural_key(self):
         return (self.subject_identifier, self.registration_identifier,)
 
@@ -99,7 +100,9 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
             subject_identifier=self.subject_identifier)
         super().save(*args, **kwargs)
 
+    def get_search_slug_fields(self):
+        fields = ['subject_identifier']
+        return fields
+
     class Meta(ConsentModelMixin.Meta):
-        verbose_name = 'Clinic Consent RBD'
-        verbose_name_plural = 'Clinic Consent RBD'
-        ordering = ('-created',)
+        ordering = ('-created', )

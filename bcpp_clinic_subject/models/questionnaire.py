@@ -1,9 +1,9 @@
 from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
+from edc_base.model_fields.custom_fields import OtherCharField
 from edc_constants.choices import YES_NO_DWTA, YES_NO_NA_DWTA
 
 from bcpp_clinic_screening.choices import VERBALHIVRESULT_CHOICE
-from edc_base.model_fields.custom_fields import OtherCharField
 
 from ..choices import REGISTRATION_TYPES
 from .model_mixins import CrfModelMixin
@@ -67,7 +67,3 @@ class Questionnaire(CrfModelMixin):
         blank=True,
         help_text="",
     )
-
-    class Meta(CrfModelMixin.Meta):
-        verbose_name = "Questionnaire"
-        verbose_name_plural = "Questionnaire"

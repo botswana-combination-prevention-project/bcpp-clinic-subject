@@ -11,12 +11,12 @@ os.chdir(os.path.normpath(os.path.join(os.path.abspath(__file__), os.pardir)))
 
 setup(
     name='bcpp-clinic-subject',
-    version='0.1dev0',
+    version='0.1.0',
     author=u'Coulson Thabo Kgathi',
     author_email='ckgathi@gmail.com',
     packages=find_packages(),
     include_package_data=True,
-    url='https://github.com/botswana-harvard/clinic-subject',
+    url='https://github.com/botswana-harvard/bcpp-clinic-subject',
     license='GPL license, see LICENSE',
     description='BCPP Clinic Subject module.',
     long_description=README,

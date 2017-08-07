@@ -5,7 +5,7 @@ from edc_lab.admin_site import edc_lab_admin
 
 from ...models import Result
 from ..model_admin_mixin import ModelAdminMixin
-from ..result.result_item_admin import ResultItemInlineAdmin
+from .result_item_admin import ResultItemInlineAdmin
 
 
 @admin.register(Result, site=edc_lab_admin)

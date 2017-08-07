@@ -17,7 +17,9 @@ class DailyLog(BaseUuidModel):
     report_datetime = models.DateTimeField(default=get_utcnow)
 
     report_date = models.DateTimeField(
-        editable=False, null=True, unique=True)
+        null=True,
+        unique=True,
+        editable=False)
 
     from_pharma = models.IntegerField(
         verbose_name='Number of patients referred from pharmacy')

@@ -1,5 +1,6 @@
 from django.db import models
 
+from edc_base.model_managers import HistoricalRecords
 from edc_locator.model_mixins import LocatorModelMixin
 from edc_base.model_mixins.base_uuid_model import BaseUuidModel
 from django_crypto_fields.fields.encrypted_char_field import EncryptedCharField
@@ -73,10 +74,10 @@ class SubjectLocator(LocatorModelMixin, RequiresConsentMixin, BaseUuidModel):
         null=True,
     )
 
+    history = HistoricalRecords()
+
     def __str__(self):
         return self.subject_identifier
 
     class Meta(RequiresConsentMixin.Meta):
-        verbose_name = "Clinic Subject Locator"
-        verbose_name_plural = "Clinic Subject Locator"
         consent_model = 'bcpp_clinic_subject.subjectconsent'

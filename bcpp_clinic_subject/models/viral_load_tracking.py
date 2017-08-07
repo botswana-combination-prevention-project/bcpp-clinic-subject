@@ -28,7 +28,9 @@ class ViralLoadTracking(CrfModelMixin):
         verbose_name='Date / Time Specimen Drawn',
         null=True,
         blank=True,
-        help_text='If not drawn, leave blank. Same as date and time of finger prick in case on DBS.',
+        help_text=(
+            'If not drawn, leave blank. Same as date and time '
+            'of finger prick in case on DBS.'),
     )
 
     clinician_initials = InitialsField(
@@ -37,7 +39,3 @@ class ViralLoadTracking(CrfModelMixin):
         blank=True,
         default='--',
     )
-
-    class Meta(CrfModelMixin.Meta):
-        verbose_name = 'Viral Load Tracking'
-        verbose_name_plural = 'Viral Load Tracking'

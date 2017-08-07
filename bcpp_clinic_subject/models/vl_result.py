@@ -1,11 +1,9 @@
 from django_crypto_fields.fields import EncryptedCharField
 from django.db import models
-
-from edc_base.model_managers import HistoricalRecords
 from edc_base.model_fields import InitialsField
 
-from .model_mixins import CrfModelMixin
 from ..choices import COMMUNITIES_NAMES
+from .model_mixins import CrfModelMixin
 
 
 class VlResult(CrfModelMixin):
@@ -80,9 +78,3 @@ class VlResult(CrfModelMixin):
         max_length=25,
         help_text="Validation reference",
     )
-
-    history = HistoricalRecords()
-
-    class Meta(CrfModelMixin.Meta):
-        verbose_name = "Clinic VL Result"
-        verbose_name_plural = "Clinic VL Result"

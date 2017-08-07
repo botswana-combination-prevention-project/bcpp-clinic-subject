@@ -1,4 +1,4 @@
-from bcpp_clinic_validations.form_validators import QuestionnaireFormValidator
+from bcpp_clinic_validators import QuestionnaireFormValidator
 
 from ..models import Questionnaire
 from .modelform_mixin import SubjectModelFormMixin
@@ -6,11 +6,7 @@ from .modelform_mixin import SubjectModelFormMixin
 
 class QuestionnaireForm (SubjectModelFormMixin):
 
-    def clean(self):
-        cleaned_data = super().clean()
-        cleaned_data = QuestionnaireFormValidator(
-            cleaned_data=cleaned_data).clean()
-        return cleaned_data
+    form_validator_cls = QuestionnaireFormValidator
 
     class Meta:
         model = Questionnaire

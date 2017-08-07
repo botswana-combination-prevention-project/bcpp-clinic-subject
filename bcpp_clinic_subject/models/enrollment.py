@@ -2,7 +2,7 @@ from django.db import models
 from django.utils import timezone
 
 from edc_appointment.model_mixins import CreateAppointmentsMixin
-from edc_base.model_managers.historical_records import HistoricalRecords
+from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins.base_uuid_model import BaseUuidModel
 from edc_visit_schedule.model_mixins import EnrollmentModelMixin
 
@@ -31,8 +31,5 @@ class Enrollment(EnrollmentModelMixin, CreateAppointmentsMixin, BaseUuidModel):
 
     history = HistoricalRecords()
 
-    class Meta:
+    class Meta(EnrollmentModelMixin.Meta):
         visit_schedule_name = 'visit_schedule1.schedule1'
-        consent_model = 'bcpp_clinic_subject.subjectconsent'
-        verbose_name = 'Enrollment Clinic'
-        verbose_name_plural = 'Enrollment Clinic'

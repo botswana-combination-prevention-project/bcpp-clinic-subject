@@ -49,8 +49,3 @@ class SubjectVisit(VisitModelMixin, CreatesMetadataModelMixin,
                                       self.appointment.registered_subject.first_name,
                                       self.appointment.registered_subject.gender,
                                       self.appointment.visit_definition.code)
-
-    class Meta(VisitModelMixin.Meta, RequiresConsentMixin.Meta):
-        verbose_name = "Clinic Subject Visit"
-        verbose_name_plural = "Clinic Subject Visit"
-        consent_model = 'bcpp_clinic_subject.subjectconsent'

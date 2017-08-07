@@ -4,8 +4,7 @@ from edc_lab.site_labs import site_labs
 
 from .constants import CLINIC_VIRAL_LOAD, RESEARCH_BLOOD_DRAW
 
-lab_profile = LabProfile(
-    name='bcpp_clinic_subject')
+lab_profile = LabProfile(name='bcpp_clinic_subject')
 
 wb = AliquotType(name='Whole Blood', alpha_code='WB', numeric_code='02')
 bc = AliquotType(name='Buffy Coat', alpha_code='BC', numeric_code='16')
