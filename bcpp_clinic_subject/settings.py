@@ -82,39 +82,6 @@ INSTALLED_APPS = [
     'bcpp_clinic_screening.apps.AppConfig',
 ]
 
-
-if 'test' in sys.argv:
-    MIGRATION_MODULES = {
-        'bcpp_clinic_subject': None,
-        'bcpp_clinic_screening': None,
-        'edc_sync': None,
-        'edc_metadata': None,
-        'edc_map': None,
-        'edc_timepoint': None,
-        "edc_sync": None,
-        "edc_reference": None,
-        'edc_sync_files': None,
-        'edc_identifier': None,
-        'edc_appointment': None,
-        'edc_device': None,
-        'edc_dashboard': None,
-        'edc_locator': None,
-        'edc_consent': None,
-        'edc_protocol': None,
-        'edc_search': None,
-        'edc_lab': None,
-        'edc_label': None,
-        'edc_offstudy': None,
-        'edc_visit_schedule': None,
-        'edc_visit_tracking': None,
-        'edc_registration': None,
-        'django_crypto_fields': None,
-        'django_revision': None,
-        'admin': None,
-        "auth": None,
-        'sessions': None,
-    }
-
 MIDDLEWARE_CLASSES = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',

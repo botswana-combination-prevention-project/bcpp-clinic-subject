@@ -1,10 +1,9 @@
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
-from bcpp_clinic_screening.models import SubjectEligibility
 from edc_consent.exceptions import ConsentError
 
-from .subject_consent import SubjectConsent
+from .models import SubjectConsent
 
 
 @receiver(post_save, weak=False, sender=SubjectConsent,
