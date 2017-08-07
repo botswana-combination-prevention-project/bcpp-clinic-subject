@@ -1,4 +1,4 @@
-from django.test import TestCase, tag
+from django.test import TestCase
 
 from model_mommy import mommy
 
@@ -10,7 +10,6 @@ from ..model_wrappers import SubjectConsentModelWrapper, CrfModelWrapper
 from .subject_helper import SubjectHelper
 
 
-@tag('wrappers')
 class TestWrappers(TestCase):
 
     subject_helper = SubjectHelper()

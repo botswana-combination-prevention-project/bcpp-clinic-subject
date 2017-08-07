@@ -4,7 +4,7 @@ from edc_base.model_fields.custom_fields import InitialsField
 from edc_constants.choices import YES_NO
 from edc_lab.choices import REASON_NOT_DRAWN
 
-from .crf_model_mixin import CrfModelMixin
+from .model_mixins import CrfModelMixin
 
 
 class ViralLoadTracking(CrfModelMixin):

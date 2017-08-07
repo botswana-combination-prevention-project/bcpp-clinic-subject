@@ -1,5 +1,5 @@
 from .appointment import Appointment
-from .crf_model_mixin import CrfModelMixin
+from bcpp_clinic_subject.models.model_mixins.crf_model_mixin import CrfModelMixin
 from .daily_log import DailyLog
 from .disenrollment import Disenrollment
 from .enrollment import Enrollment

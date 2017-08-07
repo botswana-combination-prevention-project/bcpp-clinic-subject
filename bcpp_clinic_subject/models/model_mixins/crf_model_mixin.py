@@ -19,7 +19,7 @@ from edc_reference.model_mixins import ReferenceModelMixin
 from edc_consent.model_mixins import (
     RequiresConsentMixin as BaseRequiresConsentMixin)
 
-from .subject_visit import SubjectVisit
+from ..subject_visit import SubjectVisit
 
 
 class CrfModelMixin(VisitTrackingCrfModelMixin, OffstudyMixin,

@@ -6,7 +6,7 @@ from bcpp_clinic_screening.choices import VERBALHIVRESULT_CHOICE
 from edc_base.model_fields.custom_fields import OtherCharField
 
 from ..choices import REGISTRATION_TYPES
-from ..models.crf_model_mixin import CrfModelMixin
+from .model_mixins import CrfModelMixin
 
 
 class Questionnaire(CrfModelMixin):

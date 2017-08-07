@@ -16,7 +16,7 @@ reference = ReferenceModelConfig(
     model='bcpp_clinic_subject.vlresult',
     fields=['report_datetime'])
 site_reference_configs.register(reference)
-
+#
 reference = ReferenceModelConfig(
     model='bcpp_clinic_subject.subjectrequisition',
     fields=['report_datetime'])
