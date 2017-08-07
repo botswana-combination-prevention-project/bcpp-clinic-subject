@@ -93,7 +93,10 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
 
     def save(self, *args, **kwargs):
         self.registration_identifier = self.screening_identifier
-        self.eligibility_verifier_cls()
+        self.eligibility_verifier_cls(
+            created=self.id,
+            screening_identifier=self.screening_identifier,
+            subject_identifier=self.subject_identifier)
         super().save(*args, **kwargs)
 
     class Meta(ConsentModelMixin.Meta):
