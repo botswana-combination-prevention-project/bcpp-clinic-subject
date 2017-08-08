@@ -10,8 +10,8 @@ from edc_consent.field_mixins.bw.identity_fields_mixin import IdentityFieldsMixi
 from edc_consent.model_mixins import ConsentModelMixin
 from edc_constants.choices import YES_NO
 from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
-from bcpp_clinic_screening.models import UpdatesOrCreatesRegistrationModelMixin
 from edc_search.model_mixins import SearchSlugModelMixin
+from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
 
 from ..eligibility_verifier import EligibilityVerifier
 from ..managers import SubjectConsentManager

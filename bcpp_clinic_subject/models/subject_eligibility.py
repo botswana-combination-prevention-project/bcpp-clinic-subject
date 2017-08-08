@@ -1,73 +1,32 @@
-from django.core.exceptions import ImproperlyConfigured
-from django.core.validators import (
-    MinLengthValidator, MaxLengthValidator, RegexValidator)
+from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
 from django.db import models
-
-
 from django_crypto_fields.fields.firstname_field import FirstnameField
-
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import datetime_not_future
 from edc_base.utils import get_utcnow
-from edc_constants.choices import (
-    YES_NO_UNKNOWN, GENDER_UNDETERMINED, YES_NO_NA, YES_NO)
-
+from edc_constants.choices import YES_NO_UNKNOWN, GENDER_UNDETERMINED, YES_NO_NA, YES_NO
 from edc_constants.constants import NOT_APPLICABLE
-from edc_base.model_mixins.constants import DEFAULT_BASE_FIELDS
 from edc_map.model_mixins import MapperDataModelMixin
 from edc_map.site_mappers import site_mappers
-from edc_registration.model_mixins import (
-    UpdatesOrCreatesRegistrationModelMixin as BaseUpdatesOrCreatesRegistrationModelMixin)
+from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
 from edc_search.model_mixins import SearchSlugModelMixin
+from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 
-from ..choices import VERBALHIVRESULT_CHOICE, INABILITY_TO_PARTICIPATE_REASON
+from ..choices import VERBAL_HIVRESULT_CHOICE, INABILITY_TO_PARTICIPATE_REASON
 from ..eligibility import Eligibility
 from ..eligibility_identifier import EligibilityIdentifier
-from ..managers import EligibilityManager
-from .screening_identifier_model_mixin import ScreeningIdentifierModelMixin
 
 
-class UpdatesOrCreatesRegistrationModelMixin(BaseUpdatesOrCreatesRegistrationModelMixin):
+class EligibilityManager(models.Manager):
 
-    @property
-    def registration_unique_field(self):
-        return 'registration_identifier'
-
-    @property
-    def registration_options(self):
-        """Gathers values for common attributes between the
-        registration model and this instance.
-        """
-        registration_options = {}
-        for field in self.registration_model._meta.get_fields():
-            if field.name not in DEFAULT_BASE_FIELDS + ['_state'] + [self.registration_unique_field]:
-                try:
-                    registration_options.update({field.name: getattr(
-                        self, field.name)})
-                except AttributeError:
-                    pass
-        return registration_options
-
-    def registration_raise_on_not_unique(self):
-        """Asserts the field specified for update_or_create is unique.
-        """
-        unique_fields = ['registration_identifier']
-        for f in self.registration_model._meta.get_fields():
-            try:
-                if f.unique:
-                    unique_fields.append(f.name)
-            except AttributeError:
-                pass
-        if self.registration_unique_field not in unique_fields:
-            raise ImproperlyConfigured('Field is not unique. Got {}.{} -- {}'.format(
-                self._meta.label_lower, self.registration_unique_field))
-
-    class Meta:
-        abstract = True
+    def get_by_natural_key(self, screening_identifier):
+        return self.get(
+            screening_identifier=screening_identifier
+        )
 
 
-class SubjectEligibility (ScreeningIdentifierModelMixin, SearchSlugModelMixin,
+class SubjectEligibility (NonUniqueSubjectIdentifierModelMixin, SearchSlugModelMixin,
                           UpdatesOrCreatesRegistrationModelMixin, MapperDataModelMixin,
                           BaseUuidModel):
     """A model completed by the user that confirms and saves eligibility
@@ -184,7 +143,7 @@ class SubjectEligibility (ScreeningIdentifierModelMixin, SearchSlugModelMixin,
     hiv_status = models.CharField(
         verbose_name="Please tell me your current HIV status?",
         max_length=30,
-        choices=VERBALHIVRESULT_CHOICE,
+        choices=VERBAL_HIVRESULT_CHOICE,
         help_text='If not HIV(+) participant is not elgiible.'
     )
 
@@ -255,27 +214,16 @@ class SubjectEligibility (ScreeningIdentifierModelMixin, SearchSlugModelMixin,
         return fields
 
     @property
+    def registration_unique_field(self):
+        return 'registration_identifier'
+
+    @property
     def update_mapper_fields(self):
         mapper = site_mappers.registry.get(site_mappers.current_map_area)
         self.map_area = site_mappers.current_map_area
         self.center_lat = mapper.center_lat
         self.center_lon = mapper.center_lon
 
-    def registration_raise_on_not_unique(self):
-        """Asserts the field specified for update_or_create is unique.
-        """
-        unique_fields = ['registration_identifier']
-        for f in self.registration_model._meta.get_fields():
-            try:
-                if f.unique:
-                    unique_fields.append(f.name)
-            except AttributeError:
-                pass
-        if self.registration_unique_field not in unique_fields:
-            raise ImproperlyConfigured('Field is not unique. Got {}.{} -- {}'.format(
-                self._meta.label_lower, self.registration_unique_field))
-
     class Meta:
         verbose_name_plural = "Subject Eligibility"
-        unique_together = [
-            'first_name', 'initials', 'additional_key']
+        unique_together = ['first_name', 'initials', 'additional_key']

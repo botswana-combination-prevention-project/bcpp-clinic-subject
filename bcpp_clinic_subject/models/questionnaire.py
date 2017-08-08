@@ -2,9 +2,8 @@ from django.core.validators import MaxValueValidator, MinValueValidator
 from django.db import models
 from edc_base.model_fields.custom_fields import OtherCharField
 from edc_constants.choices import YES_NO_DWTA, YES_NO_NA_DWTA
-from bcpp_clinic_screening.choices import VERBALHIVRESULT_CHOICE
 
-from ..choices import REGISTRATION_TYPES
+from ..choices import REGISTRATION_TYPES, VERBAL_HIVRESULT_CHOICE
 from .model_mixins import CrfModelMixin
 
 
@@ -30,7 +29,7 @@ class Questionnaire(CrfModelMixin):
     current_hiv_status = models.CharField(
         verbose_name="What is your current HIV status?",
         max_length=25,
-        choices=VERBALHIVRESULT_CHOICE,
+        choices=VERBAL_HIVRESULT_CHOICE,
         null=True,
     )
 
