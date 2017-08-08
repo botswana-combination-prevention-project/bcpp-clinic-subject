@@ -1,13 +1,12 @@
-from edc_visit_tracking.form_mixins import VisitFormMixin
+from bcpp_clinic_validators import SubjectVisitFormValidator
 
 from ..models import SubjectVisit
 from .modelform_mixin import SubjectModelFormMixin
 
 
-class SubjectVisitForm (VisitFormMixin, SubjectModelFormMixin):
+class SubjectVisitForm (SubjectModelFormMixin):
 
-    def validate_reason_and_info_source(self):
-        pass
+    form_validator_cls = SubjectVisitFormValidator
 
     class Meta:
         model = SubjectVisit
