@@ -38,7 +38,7 @@ if 'bcpp_clinic_subject' in settings.APP_NAME:
     from edc_timepoint.timepoint import Timepoint
     from edc_visit_tracking.apps import AppConfig as BaseEdcVisitTrackingAppConfig
     from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
-    from .constants import CLINIC_RBD
+    from .constants import RESEARCH_BLOOD_DRAW
 
 #     class EdcIdentifierAppConfig(BaseEdcIdentifierAppConfig):
 #         identifier_prefix = '066'
@@ -85,7 +85,7 @@ if 'bcpp_clinic_subject' in settings.APP_NAME:
 
     class EdcMetadataAppConfig(BaseEdcMetadataAppConfig):
         reason_field = {'bcpp_clinic_subject.subjectvisit': 'reason'}
-        create_on_reasons = [CLINIC_RBD, SCHEDULED, UNSCHEDULED]
+        create_on_reasons = [RESEARCH_BLOOD_DRAW, SCHEDULED, UNSCHEDULED]
         delete_on_reasons = [LOST_VISIT, FAILED_ELIGIBILITY]
         metadata_rules_enabled = True  # default
 

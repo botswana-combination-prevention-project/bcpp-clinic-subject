@@ -8,6 +8,7 @@ git+https://github.com/botswana-harvard/edc-metadata.git
 git+https://github.com/botswana-harvard/edc-model-wrapper.git
 git+https://github.com/botswana-harvard/edc-protocol.git
 git+https://github.com/botswana-harvard/edc-registration.git
+git+https://github.com/botswana-harvard/bcpp-community.git
 git+https://github.com/botswana-harvard/bcpp-clinic-screening.git
 git+https://github.com/botswana-harvard/bcpp-clinic-validations.git
 git+https://github.com/botswana-harvard/bcpp-clinic-subject.git

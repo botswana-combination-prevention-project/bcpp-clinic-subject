@@ -7,7 +7,7 @@ from edc_metadata.models import RequisitionMetadata, CrfMetadata
 
 
 from ..constants import (
-    INITIATION, CLINIC_VIRAL_LOAD, MASA_VL_SCHEDULED, RESEARCH_BLOOD_DRAW)
+    INITIATION, VIRAL_LOAD, MASA_VL_SCHEDULED, RESEARCH_BLOOD_DRAW)
 from ..models.questionnaire import Questionnaire
 from ..models.viral_load_tracking import ViralLoadTracking
 from .subject_helper import SubjectHelper
@@ -34,7 +34,7 @@ class TestRuleGroups(TestCase):
 
         reqs = RequisitionMetadata.objects.filter(
             subject_identifier=self.subject_visit.subject_identifier,
-            panel_name=CLINIC_VIRAL_LOAD,
+            panel_name=VIRAL_LOAD,
             entry_status=REQUIRED)
         self.assertEqual(reqs.count(), 1)
 
@@ -51,7 +51,7 @@ class TestRuleGroups(TestCase):
 
         reqs = RequisitionMetadata.objects.filter(
             subject_identifier=self.subject_visit.subject_identifier,
-            panel_name=CLINIC_VIRAL_LOAD,
+            panel_name=VIRAL_LOAD,
             entry_status=REQUIRED)
         self.assertEqual(reqs.count(), 1)
 
@@ -68,7 +68,7 @@ class TestRuleGroups(TestCase):
 
         reqs = RequisitionMetadata.objects.filter(
             subject_identifier=self.subject_visit.subject_identifier,
-            panel_name=CLINIC_VIRAL_LOAD,
+            panel_name=VIRAL_LOAD,
             entry_status=NOT_REQUIRED)
         self.assertEqual(reqs.count(), 1)
 

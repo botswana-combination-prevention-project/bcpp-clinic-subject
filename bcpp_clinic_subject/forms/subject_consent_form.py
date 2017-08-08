@@ -1,7 +1,5 @@
-
 from django import forms
 
-from bcpp_clinic_screening.models import SubjectEligibility
 from edc_consent.modelform_mixins import ConsentModelFormMixin
 
 from ..choices import COMMUNITIES
@@ -10,6 +8,8 @@ from .modelform_mixin import SubjectModelFormMixin
 
 
 class SubjectConsentForm(ConsentModelFormMixin, SubjectModelFormMixin):
+
+    subject_eligibility_model = 'bcpp_clinic_screening.subjecteligibility'
 
     def clean(self):
         cleaned_data = super().clean()

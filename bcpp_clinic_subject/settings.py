@@ -49,6 +49,7 @@ INSTALLED_APPS = [
     'edc_device.apps.AppConfig',
     'edc_lab.apps.AppConfig',
     'edc_sync.apps.AppConfig',
+    'bcpp_community.apps.AppConfig',
     'bcpp_clinic_screening.apps.AppConfig',
     'bcpp_clinic_subject.apps.EdcProtocolAppConfig',
     'bcpp_clinic_subject.apps.EdcVisitTrackingAppConfig',
