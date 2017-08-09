@@ -61,24 +61,21 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
         max_length=50,
         null=True,
         blank=True,
-        help_text="if known."
-    )
+        help_text="if known.")
 
     htc_identifier = models.CharField(
         verbose_name=("HTC Identifier"),
         max_length=50,
         null=True,
         blank=True,
-        help_text="if known."
-    )
+        help_text="if known.")
 
     pims_identifier = models.CharField(
         verbose_name=("PIMS identifier"),
         max_length=50,
         null=True,
         blank=True,
-        help_text="if known."
-    )
+        help_text="if known.")
 
     objects = SubjectConsentManager()
 

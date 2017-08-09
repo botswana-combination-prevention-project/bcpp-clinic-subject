@@ -7,7 +7,7 @@ class EligibilityDoesNotExist(Exception):
 
 
 class EnrollmentCreator:
-    """Create an enrollment if does not exist after consent is created.
+    """Create an enrollment if does not exist.
     """
     enrollment_model = 'bcpp_clinic_subject.enrollment'
 
@@ -26,7 +26,7 @@ class EnrollmentCreator:
 
 class EligibilityVerifier:
 
-    eligibility_model = 'bcpp_clinic_screening.subjecteligibility'
+    eligibility_model = 'bcpp_clinic_subject.subjecteligibility'
     enrollment_creator_cls = EnrollmentCreator
 
     def __init__(self, created=None, screening_identifier=None, subject_identifier=None):
@@ -38,7 +38,7 @@ class EligibilityVerifier:
                     screening_identifier=screening_identifier)
             except ObjectDoesNotExist:
                 raise EligibilityDoesNotExist(
-                    "Consent can not exist without an eligibility.")
+                    "Eligibility must be completed first.")
             else:
                 eligibility_obj.subject_identifier = subject_identifier
                 eligibility_obj.save()

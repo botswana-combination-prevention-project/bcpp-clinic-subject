@@ -32,6 +32,7 @@ VERBAL_HIVRESULT_CHOICE = (
     (IND, _('Indeterminate')),
     (UNK, _('I am not sure')),
     (DWTA, _('Don\'t want to answer')),
+    (NOT_APPLICABLE, _('Not applicable')),
 )
 
 INABILITY_TO_PARTICIPATE_REASON = (
