@@ -42,10 +42,10 @@ INSTALLED_APPS = [
     'django_revision.apps.AppConfig',
     'rest_framework',
     'rest_framework.authtoken',
-    'edc_appointment.apps.AppConfig',
     'edc_consent.apps.AppConfig',
     'edc_registration.apps.AppConfig',
     'edc_identifier.apps.AppConfig',
+    'edc_visit_schedule.apps.AppConfig',
     'edc_device.apps.AppConfig',
     'edc_lab.apps.AppConfig',
     'edc_map.apps.AppConfig',
@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'bcpp_clinic_visit_schedule.apps.AppConfig',
     'bcpp_clinic_metadata_rules.apps.AppConfig',
     'bcpp_clinic_subject.apps.AppConfig',
+    'bcpp_clinic_subject.apps.EdcTimepointAppConfig',
+    'bcpp_clinic_subject.apps.EdcAppointmentAppConfig',
 ]
 
 MIDDLEWARE = [

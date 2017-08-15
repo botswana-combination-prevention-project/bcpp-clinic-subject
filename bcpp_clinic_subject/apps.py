@@ -99,28 +99,28 @@ if 'bcpp_clinic_subject' in settings.APP_NAME:
         visit_models = {
             'bcpp_clinic_subject': ('subject_visit', 'bcpp_clinic_subject.subjectvisit')}
 
-#     class EdcTimepointAppConfig(BaseEdcTimepointAppConfig):
-#         timepoints = [
-#             Timepoint(
-#                 model='bcpp_clinic_subject.appointment',
-#                 datetime_field='appt_datetime',
-#                 status_field='appt_status',
-#                 closed_status='DONE'
-#             ),
-#             Timepoint(
-#                 model='bcpp_clinic_subject.historicalappointment',
-#                 datetime_field='appt_datetime',
-#                 status_field='appt_status',
-#                 closed_status='DONE'
-#             ),
-#         ]
+    class EdcTimepointAppConfig(BaseEdcTimepointAppConfig):
+        timepoints = [
+            Timepoint(
+                model='bcpp_clinic_subject.appointment',
+                datetime_field='appt_datetime',
+                status_field='appt_status',
+                closed_status='DONE'
+            ),
+            Timepoint(
+                model='bcpp_clinic_subject.historicalappointment',
+                datetime_field='appt_datetime',
+                status_field='appt_status',
+                closed_status='DONE'
+            ),
+        ]
 
-#     class EdcAppointmentAppConfig(BaseEdcAppointmentAppConfig):
-#         app_label = 'bcpp_clinic_subject'
-#         default_appt_type = 'clinic'
-#         facilities = {
-#             'clinic': Facility(name='clinic', days=[MO, TU, WE, TH, FR, SA, SU],
-# slots=[99999, 99999, 99999, 99999, 99999, 99999, 99999])}
+    class EdcAppointmentAppConfig(BaseEdcAppointmentAppConfig):
+        app_label = 'bcpp_clinic_subject'
+        default_appt_type = 'clinic'
+        facilities = {
+            'clinic': Facility(name='clinic', days=[MO, TU, WE, TH, FR, SA, SU],
+                               slots=[99999, 99999, 99999, 99999, 99999, 99999, 99999])}
 
 #     class EdcBaseAppConfig(BaseEdcBaseAppConfig):
 #         project_name = 'Bcpp Clinic'
