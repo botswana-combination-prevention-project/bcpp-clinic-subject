@@ -7,8 +7,10 @@ from django.conf import settings
 class AppConfig(DjangoApponfig):
     name = 'bcpp_clinic_subject'
     admin_site_name = 'bcpp_clinic_subject_admin'
-    eligibility_age_adult_lower = 16
+    eligibility_age_adult_lower = 18
     eligibility_age_adult_upper = 64
+    eligibility_age_minor_lower = 16
+    eligibility_age_minor_upper = 17
 
     def ready(self):
         from .signals import subject_consent_on_post_save
@@ -38,7 +40,11 @@ if 'bcpp_clinic_subject' in settings.APP_NAME:
     from edc_timepoint.timepoint import Timepoint
     from edc_visit_tracking.apps import AppConfig as BaseEdcVisitTrackingAppConfig
     from edc_visit_tracking.constants import SCHEDULED, UNSCHEDULED, LOST_VISIT
+    from bcpp_community.apps import AppConfig as BaseBcppCommunityAppConfig
     from .constants import RESEARCH_BLOOD_DRAW
+
+    class BcppCommunityAppConfig(BaseBcppCommunityAppConfig):
+        mapper_model = 'bcpp_clinic_subject.subjecteligibility'
 
 #     class EdcIdentifierAppConfig(BaseEdcIdentifierAppConfig):
 #         identifier_prefix = '066'

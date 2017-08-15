@@ -9,7 +9,8 @@ from .model_admin_mixin import ModelAdminMixin
 
 
 @admin.register(SubjectEligibility, site=bcpp_clinic_subject_admin)
-class SubjectEligibilityAdmin(ModelAdminMixin, FieldsetsModelAdminMixin, admin.ModelAdmin):
+class SubjectEligibilityAdmin(
+        ModelAdminMixin, FieldsetsModelAdminMixin, admin.ModelAdmin):
 
     form = SubjectEligibilityForm
 

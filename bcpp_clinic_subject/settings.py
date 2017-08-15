@@ -48,10 +48,13 @@ INSTALLED_APPS = [
     'edc_identifier.apps.AppConfig',
     'edc_device.apps.AppConfig',
     'edc_lab.apps.AppConfig',
+    'edc_map.apps.AppConfig',
     'edc_sync.apps.AppConfig',
-    'bcpp_community.apps.AppConfig',
+    'bcpp_clinic_subject.apps.BcppCommunityAppConfig',
     'bcpp_clinic_subject.apps.EdcProtocolAppConfig',
     'bcpp_clinic_subject.apps.EdcVisitTrackingAppConfig',
+    'bcpp_clinic_visit_schedule.apps.AppConfig',
+    'bcpp_clinic_metadata_rules.apps.AppConfig',
     'bcpp_clinic_subject.apps.AppConfig',
 ]
 
@@ -145,6 +148,7 @@ DEVICE_ROLE = CENTRAL_SERVER
 if 'test' in sys.argv:
 
     class DisableMigrations:
+
         def __contains__(self, item):
             return True
 

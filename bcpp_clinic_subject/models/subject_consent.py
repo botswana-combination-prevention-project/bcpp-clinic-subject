@@ -1,6 +1,9 @@
 from django.db import models
+
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins.base_uuid_model import BaseUuidModel
+from edc_base.model_mixins.constants import DEFAULT_BASE_FIELDS
+
 from edc_consent.field_mixins import CitizenFieldsMixin
 from edc_consent.field_mixins import PersonalFieldsMixin
 from edc_consent.field_mixins import ReviewFieldsMixin
@@ -9,7 +12,7 @@ from edc_consent.field_mixins import VulnerabilityFieldsMixin
 from edc_consent.field_mixins.bw.identity_fields_mixin import IdentityFieldsMixin
 from edc_consent.model_mixins import ConsentModelMixin
 from edc_constants.choices import YES_NO
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
+from edc_identifier.model_mixins import UniqueSubjectIdentifierModelMixin
 from edc_search.model_mixins import SearchSlugModelMixin
 from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
 
@@ -18,7 +21,7 @@ from ..managers import SubjectConsentManager
 
 
 class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
-                     NonUniqueSubjectIdentifierModelMixin, IdentityFieldsMixin,
+                     UniqueSubjectIdentifierModelMixin, IdentityFieldsMixin,
                      ReviewFieldsMixin, PersonalFieldsMixin,
                      SampleCollectionFieldsMixin, CitizenFieldsMixin,
                      VulnerabilityFieldsMixin, SearchSlugModelMixin,
@@ -33,13 +36,6 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
         max_length=50,
         blank=True,
         unique=True)
-
-    registration_identifier = models.CharField(
-        verbose_name='Registration Identifier',
-        max_length=50,
-        blank=True,
-        unique=True,
-        editable=False)
 
     is_minor = models.CharField(
         verbose_name=("Is subject a minor?"),
@@ -90,7 +86,6 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
             self.version)
 
     def save(self, *args, **kwargs):
-        self.registration_identifier = self.screening_identifier
         self.eligibility_verifier_cls(
             created=self.id,
             screening_identifier=self.screening_identifier,
@@ -100,6 +95,26 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
     def get_search_slug_fields(self):
         fields = ['subject_identifier']
         return fields
+
+    @property
+    def registration_unique_field(self):
+        return 'screening_identifier'
+
+    @property
+    def registration_options(self):
+        """Gathers values for common attributes between the
+        registration model and this instance.
+        """
+        registration_options = {}
+        rs = self.registration_model()
+        for k, v in self.__dict__.items():
+            if k not in DEFAULT_BASE_FIELDS + ['_state', 'subject_identifier_as_pk']:
+                try:
+                    getattr(rs, k)
+                    registration_options.update({k: v})
+                except AttributeError:
+                    pass
+        return registration_options
 
     class Meta(ConsentModelMixin.Meta):
         ordering = ('-created', )

@@ -10,3 +10,5 @@ from .subject_requisition_admin import SubjectRequisitionAdmin
 from .vl_result_admin import VlResultAdmin
 from .result.result_admin import ResultAdmin
 from .result.result_item_admin import ResultItemAdmin
+from .subject_eligibility_admin import SubjectEligibilityAdmin
+from .enrollment_loss_admin import EnrollmentLossAdmin

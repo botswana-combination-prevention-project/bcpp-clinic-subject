@@ -1,9 +1,9 @@
-from edc_base.modelform_mixins import CommonCleanModelFormMixin
+from .modelform_mixin import SubjectModelFormMixin
 
 from ..models import EnrollmentLoss
 
 
-class EnrollmentLossForm(CommonCleanModelFormMixin):
+class EnrollmentLossForm(SubjectModelFormMixin):
 
     class Meta:
         model = EnrollmentLoss

@@ -1,6 +1,4 @@
 from django.contrib import admin
-from django.urls.base import reverse
-from django.urls.exceptions import NoReverseMatch
 
 from edc_base.modeladmin_mixins.model_admin_redirect_on_delete_mixin import ModelAdminRedirectOnDeleteMixin
 from edc_base.fieldsets.fieldsets_modeladmin_mixin import FieldsetsModelAdminMixin

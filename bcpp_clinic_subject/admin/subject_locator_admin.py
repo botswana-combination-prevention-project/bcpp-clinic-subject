@@ -1,12 +1,12 @@
 from django.contrib import admin
 
 from edc_base.fieldsets import FieldsetsModelAdminMixin
+from edc_base.modeladmin_mixins import audit_fieldset_tuple
 
 from ..admin_site import bcpp_clinic_subject_admin
 from ..forms import SubjectLocatorForm
-from ..models import SubjectLocator, SubjectVisit
+from ..models import SubjectLocator
 from .model_admin_mixin import ModelAdminMixin
-from edc_base.modeladmin_mixins import audit_fieldset_tuple
 
 
 @admin.register(SubjectLocator, site=bcpp_clinic_subject_admin)

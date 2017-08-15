@@ -14,4 +14,4 @@ def subject_consent_on_post_save(sender, instance, raw, created, **kwargs):
         EligibilityVerifier(
             created=instance.id,
             subject_identifier=instance.subject_identifier,
-            is_eligible=instance.is_eligible)
+            screening_identifier=instance.screening_identifier)

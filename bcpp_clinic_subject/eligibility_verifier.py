@@ -6,6 +6,10 @@ class EligibilityDoesNotExist(Exception):
     pass
 
 
+class ConsentDoesNotExist(Exception):
+    pass
+
+
 class EnrollmentCreator:
     """Create an enrollment if does not exist.
     """
@@ -13,6 +17,14 @@ class EnrollmentCreator:
 
     def __init__(self, subject_identifier=None, is_eligible=None):
         enrollment_model_cls = django_apps.get_model(self.enrollment_model)
+        SubjectConsent = django_apps.get_model(
+            'bcpp_clinic_subject.subjectconsent')
+        try:
+            subject_consent = SubjectConsent.objects.get(
+                subject_identifier=subject_identifier)
+        except ObjectDoesNotExist:
+            raise ConsentDoesNotExist(
+                f'Subject consent should exist for subject {subject_identifier}')
         try:
             enrollment_model_cls.objects.get(
                 subject_identifier=subject_identifier,
@@ -20,7 +32,7 @@ class EnrollmentCreator:
         except ObjectDoesNotExist:
             enrollment_model_cls.objects.create(
                 subject_identifier=subject_identifier,
-                consent_identifier=self.consent_identifier,
+                consent_identifier=subject_consent.consent_identifier,
                 is_eligible=is_eligible)
 
 
@@ -42,4 +54,6 @@ class EligibilityVerifier:
             else:
                 eligibility_obj.subject_identifier = subject_identifier
                 eligibility_obj.save()
-            self.enrollment_creator_cls(eligibility_obj=eligibility_obj)
+            self.enrollment_creator_cls(
+                subject_identifier=subject_identifier,
+                is_eligible=eligibility_obj.is_eligible)

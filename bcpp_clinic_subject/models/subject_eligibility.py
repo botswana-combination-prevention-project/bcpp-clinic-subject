@@ -1,21 +1,22 @@
 from django.core.validators import MinLengthValidator, MaxLengthValidator, RegexValidator
 from django.db import models
 from django_crypto_fields.fields.firstname_field import FirstnameField
+
 from edc_base.model_managers import HistoricalRecords
 from edc_base.model_mixins import BaseUuidModel
 from edc_base.model_validators import datetime_not_future
 from edc_base.utils import get_utcnow
 from edc_constants.choices import YES_NO_UNKNOWN, GENDER_UNDETERMINED, YES_NO_NA, YES_NO
 from edc_constants.constants import NOT_APPLICABLE
+from edc_identifier.model_mixins import UniqueSubjectIdentifierModelMixin
 from edc_map.model_mixins import MapperDataModelMixin
 from edc_map.site_mappers import site_mappers
 from edc_registration.model_mixins import UpdatesOrCreatesRegistrationModelMixin
 from edc_search.model_mixins import SearchSlugModelMixin
-from edc_identifier.model_mixins import NonUniqueSubjectIdentifierModelMixin
 
 from ..choices import VERBAL_HIVRESULT_CHOICE, INABILITY_TO_PARTICIPATE_REASON
 from ..eligibility import Eligibility
-from ..eligibility_identifier import EligibilityIdentifier
+from ..screening_identifier import ScreeningIdentifier
 
 
 class EligibilityManager(models.Manager):
@@ -26,7 +27,7 @@ class EligibilityManager(models.Manager):
         )
 
 
-class SubjectEligibility (NonUniqueSubjectIdentifierModelMixin, SearchSlugModelMixin,
+class SubjectEligibility (UniqueSubjectIdentifierModelMixin, SearchSlugModelMixin,
                           UpdatesOrCreatesRegistrationModelMixin, MapperDataModelMixin,
                           BaseUuidModel):
     """A model completed by the user that confirms and saves eligibility
@@ -35,13 +36,6 @@ class SubjectEligibility (NonUniqueSubjectIdentifierModelMixin, SearchSlugModelM
 
     screening_identifier = models.CharField(
         verbose_name='Eligibility Identifier',
-        max_length=50,
-        blank=True,
-        unique=True,
-        editable=False)
-
-    registration_identifier = models.CharField(
-        verbose_name='Registration Identifier',
         max_length=50,
         blank=True,
         unique=True,
@@ -192,7 +186,7 @@ class SubjectEligibility (NonUniqueSubjectIdentifierModelMixin, SearchSlugModelM
 
     def save(self, *args, **kwargs):
         if not self.id:
-            self.screening_identifier = EligibilityIdentifier().identifier
+            self.screening_identifier = ScreeningIdentifier().identifier
             self.update_subject_identifier_on_save()
         eligibility = Eligibility(
             age=self.age_in_years, literate=self.literacy,
@@ -202,7 +196,6 @@ class SubjectEligibility (NonUniqueSubjectIdentifierModelMixin, SearchSlugModelM
             participation=self.inability_to_participate)
         self.is_eligible = eligibility.eligible
         self.loss_reason = eligibility.reasons
-        self.registration_identifier = self.screening_identifier
         self.update_mapper_fields
         super().save(*args, **kwargs)
 
@@ -210,12 +203,20 @@ class SubjectEligibility (NonUniqueSubjectIdentifierModelMixin, SearchSlugModelM
         return f'{self.first_name} ({self.initials}) {self.gender}/{self.age_in_years}'
 
     def get_search_slug_fields(self):
-        fields = ['eligibility_identifier']
+        fields = ['screening_identifier']
         return fields
+
+    def update_subject_identifier_on_save(self):
+        """Overridden to not set the subject identifier on save.
+        """
+        if not self.subject_identifier:
+            self.subject_identifier = self.subject_identifier_as_pk.hex
+            self.subject_identifier_aka = self.subject_identifier_as_pk.hex
+        return self.subject_identifier
 
     @property
     def registration_unique_field(self):
-        return 'registration_identifier'
+        return 'screening_identifier'
 
     @property
     def update_mapper_fields(self):
@@ -225,5 +226,5 @@ class SubjectEligibility (NonUniqueSubjectIdentifierModelMixin, SearchSlugModelM
         self.center_lon = mapper.center_lon
 
     class Meta:
-        verbose_name_plural = "Subject Eligibility"
-        unique_together = ['first_name', 'initials', 'additional_key']
+        unique_together = [
+            'screening_identifier', 'first_name', 'initials', 'additional_key']

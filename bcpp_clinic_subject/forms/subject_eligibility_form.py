@@ -1,11 +1,10 @@
 from bcpp_clinic_validators import SubjectEligibilityFormValidator
-from edc_base.modelform_mixins import CommonCleanModelFormMixin
-from edc_base.modelform_validators import FormValidatorMixin
 
 from ..models import SubjectEligibility
+from .modelform_mixin import SubjectModelFormMixin
 
 
-class SubjectEligibilityForm(FormValidatorMixin, CommonCleanModelFormMixin):
+class SubjectEligibilityForm(SubjectModelFormMixin):
 
     form_validator_cls = SubjectEligibilityFormValidator
 

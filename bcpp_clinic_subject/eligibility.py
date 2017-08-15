@@ -9,7 +9,7 @@ class AgeEvaluator:
 
     def __init__(self, age=None, guardian=None, adult_lower=None,
                  adult_upper=None, minor_lower=None, minor_upper=None):
-        app_config = django_apps.get_app_config('bcpp_clinic_screening')
+        app_config = django_apps.get_app_config('bcpp_clinic_subject')
         adult_lower = adult_lower or app_config.eligibility_age_adult_lower
         adult_upper = adult_upper or app_config.eligibility_age_adult_upper
         minor_lower = minor_lower or app_config.eligibility_age_minor_lower

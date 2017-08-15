@@ -1,4 +1,4 @@
-from django.test import TestCase, tag
+from django.test import TestCase
 
 from edc_sync.tests.sync_test_helper import SyncTestHelper
 

@@ -14,3 +14,4 @@ from .subject_requisition import SubjectRequisition
 from .subject_visit import SubjectVisit
 from .viral_load_tracking import ViralLoadTracking
 from .vl_result import VlResult
+from .identifier_history import IdentifierHistory
