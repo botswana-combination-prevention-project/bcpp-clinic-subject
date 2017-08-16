@@ -11,7 +11,7 @@ from ..eligibility import (
 from ..constants import ABLE_TO_PARTICIPATE, MENTAL_INCAPACITY
 
 
-class TestClinicEligibility(TestCase):
+class TestEligibilityCriteria(TestCase):
 
     def test_eligibility_invalid_age_in_years(self):
         app_config = django_apps.get_app_config('bcpp_clinic_subject')
