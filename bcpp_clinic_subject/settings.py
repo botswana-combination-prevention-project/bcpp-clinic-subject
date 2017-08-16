@@ -47,17 +47,20 @@ INSTALLED_APPS = [
     'edc_identifier.apps.AppConfig',
     'edc_visit_schedule.apps.AppConfig',
     'edc_device.apps.AppConfig',
+    'edc_reference.apps.AppConfig',
     'edc_lab.apps.AppConfig',
     'edc_map.apps.AppConfig',
     'edc_sync.apps.AppConfig',
+    'bcpp_clinic_subject.apps.EdcMetadataAppConfig',
     'bcpp_clinic_subject.apps.BcppCommunityAppConfig',
+    'bcpp_clinic_subject.apps.EdcTimepointAppConfig',
+    'bcpp_clinic_subject.apps.EdcAppointmentAppConfig',
+    'bcpp_clinic_reference.apps.AppConfig',
     'bcpp_clinic_subject.apps.EdcProtocolAppConfig',
     'bcpp_clinic_subject.apps.EdcVisitTrackingAppConfig',
     'bcpp_clinic_visit_schedule.apps.AppConfig',
     'bcpp_clinic_metadata_rules.apps.AppConfig',
-    'bcpp_clinic_subject.apps.AppConfig',
-    'bcpp_clinic_subject.apps.EdcTimepointAppConfig',
-    'bcpp_clinic_subject.apps.EdcAppointmentAppConfig',
+    'bcpp_clinic_subject.apps.AppConfig'
 ]
 
 MIDDLEWARE = [
@@ -149,14 +152,26 @@ DEVICE_ROLE = CENTRAL_SERVER
 
 if 'test' in sys.argv:
 
-    class DisableMigrations:
-
-        def __contains__(self, item):
-            return True
-
-        def __getitem__(self, item):
-            return None
-
-    MIGRATION_MODULES = DisableMigrations()
-    PASSWORD_HASHERS = ('django.contrib.auth.hashers.MD5PasswordHasher', )
-    DEFAULT_FILE_STORAGE = 'inmemorystorage.InMemoryStorage'
+    MIGRATION_MODULES = {
+        'django_crypto_fields': None,
+        'django_revision': None,
+        'edc_consent.apps': None,
+        'edc_registration': None,
+        'edc_identifier': None,
+        'edc_visit_schedule': None,
+        'edc_appointment': None,
+        'edc_device': None,
+        'edc_reference': None,
+        'edc_lab': None,
+        'edc_map': None,
+        'edc_sync': None,
+        'edc_metadata': None,
+        'bcpp_clinic_subject': None,
+        'bcpp_clinic_subject': None,
+        'bcpp_clinic_subject': None,
+        'bcpp_clinic_reference': None,
+        'bcpp_clinic_subject': None,
+        'bcpp_clinic_subject': None,
+        'bcpp_clinic_visit_schedule': None,
+        'bcpp_clinic_metadata_rules': None,
+        'bcpp_clinic_subject': None}
