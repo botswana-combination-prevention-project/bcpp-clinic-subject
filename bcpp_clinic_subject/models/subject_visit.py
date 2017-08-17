@@ -7,7 +7,6 @@ from edc_metadata.model_mixins.creates.creates_metadata_model_mixin import Creat
 from edc_visit_tracking.managers import VisitModelManager
 from edc_visit_tracking.model_mixins.visit_model_mixin import VisitModelMixin
 
-
 from ..choices import VISIT_UNSCHEDULED_REASON
 from ..constants import RESEARCH_BLOOD_DRAW
 from .appointment import Appointment

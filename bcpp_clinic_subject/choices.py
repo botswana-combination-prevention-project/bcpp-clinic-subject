@@ -1,7 +1,6 @@
-from django.utils.translation import ugettext_lazy as _
-
-from edc_constants.constants import NOT_APPLICABLE, POS, NEG, IND, UNK, DWTA, OTHER
 from bcpp_community import communities
+from django.utils.translation import ugettext_lazy as _
+from edc_constants.constants import NOT_APPLICABLE, POS, NEG, IND, UNK, DWTA, OTHER
 
 from .constants import ABLE_TO_PARTICIPATE, MENTAL_INCAPACITY
 
