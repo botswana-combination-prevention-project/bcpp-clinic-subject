@@ -37,7 +37,8 @@ class DailyLog(BaseUuidModel):
     )
 
     idcc_scheduled = models.IntegerField(
-        verbose_name='Number of patients scheduled/booked for appointments in the IDCC',
+        verbose_name='Number of patients scheduled/booked for appointments '
+        'in the IDCC',
     )
 
     idcc_newly_registered = models.IntegerField(
@@ -45,7 +46,8 @@ class DailyLog(BaseUuidModel):
     )
 
     idcc_no_shows = models.IntegerField(
-        verbose_name='Number of patients who did not show up for their appointment.',
+        verbose_name='Number of patients who did not show up for '
+        'their appointment.',
     )
 
     approached = models.IntegerField(
@@ -53,7 +55,8 @@ class DailyLog(BaseUuidModel):
     )
 
     refused = models.IntegerField(
-        verbose_name='Number of patients who refused to complete the eligibility checklist',
+        verbose_name='Number of patients who refused to complete the '
+        'eligibility checklist',
     )
 
     objects = DailyLogManager()

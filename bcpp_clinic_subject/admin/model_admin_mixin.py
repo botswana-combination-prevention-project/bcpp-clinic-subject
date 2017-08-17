@@ -1,9 +1,10 @@
 from django.contrib import admin
 
-from edc_base.modeladmin_mixins.model_admin_redirect_on_delete_mixin import ModelAdminRedirectOnDeleteMixin
-from edc_base.fieldsets.fieldsets_modeladmin_mixin import FieldsetsModelAdminMixin
-from edc_base.modeladmin_mixins.form_as_json_model_admin_mixin import FormAsJSONModelAdminMixin
-from edc_visit_tracking.modeladmin_mixins import CrfModelAdminMixin as VisitTrackingCrfModelAdminMixin
+from edc_base.modeladmin_mixins import ModelAdminRedirectOnDeleteMixin
+from edc_base.fieldsets import FieldsetsModelAdminMixin
+from edc_base.modeladmin_mixins import FormAsJSONModelAdminMixin
+from edc_visit_tracking.modeladmin_mixins import (
+    CrfModelAdminMixin as VisitTrackingCrfModelAdminMixin)
 
 from edc_base.modeladmin_mixins import (
     ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructionsMixin,
@@ -12,7 +13,8 @@ from edc_base.modeladmin_mixins import (
 from django_revision.modeladmin_mixin import ModelAdminRevisionMixin
 
 
-class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructionsMixin,
+class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
+                      ModelAdminFormInstructionsMixin,
                       ModelAdminFormAutoNumberMixin, ModelAdminRevisionMixin,
                       ModelAdminAuditFieldsMixin, ModelAdminReadOnlyMixin,
                       ModelAdminInstitutionMixin):

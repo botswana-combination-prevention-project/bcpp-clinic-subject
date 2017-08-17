@@ -9,7 +9,7 @@ from edc_consent.field_mixins import PersonalFieldsMixin
 from edc_consent.field_mixins import ReviewFieldsMixin
 from edc_consent.field_mixins import SampleCollectionFieldsMixin
 from edc_consent.field_mixins import VulnerabilityFieldsMixin
-from edc_consent.field_mixins.bw.identity_fields_mixin import IdentityFieldsMixin
+from edc_consent.field_mixins.bw import IdentityFieldsMixin
 from edc_consent.model_mixins import ConsentModelMixin
 from edc_constants.choices import YES_NO
 from edc_identifier.model_mixins import UniqueSubjectIdentifierModelMixin
@@ -81,9 +81,7 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
         return (self.subject_identifier, self.registration_identifier,)
 
     def __str__(self):
-        return '{0} V{1}'.format(
-            self.subject_identifier,
-            self.version)
+        return f'{self.subject_identifier} V{self.version}'
 
     def save(self, *args, **kwargs):
         self.eligibility_verifier_cls(
@@ -108,7 +106,8 @@ class SubjectConsent(ConsentModelMixin, UpdatesOrCreatesRegistrationModelMixin,
         registration_options = {}
         rs = self.registration_model()
         for k, v in self.__dict__.items():
-            if k not in DEFAULT_BASE_FIELDS + ['_state', 'subject_identifier_as_pk']:
+            if k not in DEFAULT_BASE_FIELDS + [
+                    '_state', 'subject_identifier_as_pk']:
                 try:
                     getattr(rs, k)
                     registration_options.update({k: v})

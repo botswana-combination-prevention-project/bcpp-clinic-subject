@@ -3,7 +3,7 @@ from django.db import models
 from edc_base.model_managers.historical_records import HistoricalRecords
 from edc_base.model_mixins.base_uuid_model import BaseUuidModel
 from edc_consent.model_mixins import RequiresConsentMixin
-from edc_metadata.model_mixins.creates.creates_metadata_model_mixin import CreatesMetadataModelMixin
+from edc_metadata.model_mixins.creates import CreatesMetadataModelMixin
 from edc_reference.model_mixins import ReferenceModelMixin
 from edc_visit_tracking.managers import VisitModelManager
 from edc_visit_tracking.model_mixins.visit_model_mixin import VisitModelMixin
@@ -44,11 +44,11 @@ class SubjectVisit(VisitModelMixin, CreatesMetadataModelMixin,
         self.subject_identifier = self.appointment.subject_identifier
         super(SubjectVisit, self).save(*args, **kwargs)
 
-    def __unicode__(self):
-        return '{} {} ({}) {}'.format(self.appointment.subject_identifier,
-                                      self.appointment.registered_subject.first_name,
-                                      self.appointment.registered_subject.gender,
-                                      self.appointment.visit_definition.code)
+    def __str__(self):
+        return (f'{self.appointment.subject_identifier} '
+                f'{self.appointment.registered_subject.first_name}'
+                f'({self.appointment.registered_subject.gender}) '
+                f'{self.appointment.visit_definition.code}')
 
     class Meta(VisitModelMixin.Meta, RequiresConsentMixin.Meta):
         app_label = 'bcpp_clinic_subject'

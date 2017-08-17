@@ -14,8 +14,9 @@ class SubjectEligibilityAdmin(
 
     form = SubjectEligibilityForm
 
-    instructions = ['This form is a tool to assist the Interviewer to confirm the '
-                    'Eligibility status of the subject. After entering the required items, click SAVE.']
+    instructions = ['This form is a tool to assist the Interviewer to confirm'
+                    'the Eligibility status of the subject. After entering'
+                    'the required items, click SAVE.']
 
     fieldsets = (
         (None, {
@@ -37,7 +38,8 @@ class SubjectEligibilityAdmin(
         audit_fieldset_tuple)
 
     list_display = (
-        'report_datetime', 'gender', 'is_eligible', 'is_consented', 'is_refused', 'map_area')
+        'report_datetime', 'gender', 'is_eligible',
+        'is_consented', 'is_refused', 'map_area')
 
     list_filter = ('gender', 'is_eligible', 'is_consented',
                    'is_refused', 'report_datetime', 'map_area')

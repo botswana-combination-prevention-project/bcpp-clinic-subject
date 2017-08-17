@@ -27,8 +27,10 @@ class EligibilityManager(models.Manager):
         )
 
 
-class SubjectEligibility (UniqueSubjectIdentifierModelMixin, SearchSlugModelMixin,
-                          UpdatesOrCreatesRegistrationModelMixin, MapperDataModelMixin,
+class SubjectEligibility (UniqueSubjectIdentifierModelMixin,
+                          SearchSlugModelMixin,
+                          UpdatesOrCreatesRegistrationModelMixin,
+                          MapperDataModelMixin,
                           BaseUuidModel):
     """A model completed by the user that confirms and saves eligibility
     information for potential participant.
@@ -48,8 +50,9 @@ class SubjectEligibility (UniqueSubjectIdentifierModelMixin, SearchSlugModelMixi
 
     first_name = FirstnameField(
         verbose_name='First name',
-        validators=[RegexValidator("^[A-Z]{1,250}$", "Ensure first name is in CAPS and "
-                                   "does not contain any spaces or numbers")],
+        validators=[RegexValidator(
+            "^[A-Z]{1,250}$", "Ensure first name is in CAPS and "
+            "does not contain any spaces or numbers")],
         help_text="")
 
     initials = models.CharField(
@@ -58,7 +61,9 @@ class SubjectEligibility (UniqueSubjectIdentifierModelMixin, SearchSlugModelMixi
         validators=[
             MinLengthValidator(2),
             MaxLengthValidator(3),
-            RegexValidator("^[A-Z]{1,3}$", "Must be Only CAPS and 2 or 3 letters. No spaces or numbers allowed.")],
+            RegexValidator(
+                "^[A-Z]{1,3}$", "Must be Only CAPS and 2 or 3 letters."
+                " No spaces or numbers allowed.")],
         help_text="")
 
     age_in_years = models.IntegerField(
@@ -68,8 +73,8 @@ class SubjectEligibility (UniqueSubjectIdentifierModelMixin, SearchSlugModelMixi
         verbose_name="If minor, is there a guardian available? ",
         max_length=10,
         choices=YES_NO_NA,
-        help_text="If a minor age 16 and 17, ensure a guardian is available otherwise"
-                  " participant will not be enrolled.")
+        help_text="If a minor age 16 and 17, ensure a guardian is available"
+        " otherwise participant will not be enrolled.")
 
     gender = models.CharField(
         verbose_name='Gender',
@@ -77,11 +82,13 @@ class SubjectEligibility (UniqueSubjectIdentifierModelMixin, SearchSlugModelMixi
         choices=GENDER_UNDETERMINED)
 
     has_identity = models.CharField(
-        verbose_name="[Interviewer] Has the subject presented a valid OMANG or other identity document?",
+        verbose_name="[Interviewer] Has the subject presented a valid OMANG"
+        " or other identity document?",
         max_length=10,
         choices=YES_NO,
-        help_text='Allow Omang, Passport number, driver\'s license number or Omang receipt number. '
-                  'If \'NO\' participant will not be enrolled.')
+        help_text='Allow Omang, Passport number, driver\'s license number'
+                  ' or Omang receipt number. If \'NO\' participant will not'
+                  ' be enrolled.')
 
     citizen = models.CharField(
         verbose_name="Are you a Botswana citizen? ",
@@ -90,7 +97,8 @@ class SubjectEligibility (UniqueSubjectIdentifierModelMixin, SearchSlugModelMixi
         help_text="")
 
     legal_marriage = models.CharField(
-        verbose_name="If not a citizen, are you legally married to a Botswana Citizen?",
+        verbose_name="If not a citizen, are you legally married to a"
+        " Botswana Citizen?",
         max_length=3,
         choices=YES_NO_NA,
         default=NOT_APPLICABLE,
@@ -98,7 +106,8 @@ class SubjectEligibility (UniqueSubjectIdentifierModelMixin, SearchSlugModelMixi
 
     marriage_certificate = models.CharField(
         verbose_name=(
-            "[Interviewer] Has the participant produced the marriage certificate, as proof? "),
+            "[Interviewer] Has the participant produced the marriage "
+            "certificate, as proof? "),
         max_length=3,
         choices=YES_NO_NA,
         default=NOT_APPLICABLE,
@@ -113,8 +122,8 @@ class SubjectEligibility (UniqueSubjectIdentifierModelMixin, SearchSlugModelMixi
             "If participant has moved into the "
             "community in the past 12 months, then "
             "since moving in has the participant typically "
-            "spent more than 3 nights per month in this community. "
-            "If 'NO (or don't want to answer)' STOP. Participant is not eligible."),
+            "spent more than 3 nights per month in this community. If 'NO "
+            "(or don't want to answer)' STOP. Participant is not eligible."),
     )
 
     literacy = models.CharField(
@@ -173,8 +182,8 @@ class SubjectEligibility (UniqueSubjectIdentifierModelMixin, SearchSlugModelMixi
         default=None,
         null=True,
         help_text=('A uuid to be added to clinic members to bypass the '
-                   'unique constraint for firstname, initials, household_structure. '
-                   'Always null for non-clinic members.'),
+                   'unique constraint for firstname, initials, '
+                   'household_structure. Always null for non-clinic members.'),
     )
 
     objects = EligibilityManager()
@@ -200,7 +209,8 @@ class SubjectEligibility (UniqueSubjectIdentifierModelMixin, SearchSlugModelMixi
         super().save(*args, **kwargs)
 
     def __str__(self):
-        return f'{self.first_name} ({self.initials}) {self.gender}/{self.age_in_years}'
+        return (f'{self.first_name} '
+                '({self.initials}) {self.gender}/{self.age_in_years}')
 
     def get_search_slug_fields(self):
         fields = ['screening_identifier']

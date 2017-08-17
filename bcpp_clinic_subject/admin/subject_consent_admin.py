@@ -18,7 +18,8 @@ from ..forms import SubjectConsentForm
 from ..models import SubjectConsent
 
 
-class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructionsMixin,
+class ModelAdminMixin(ModelAdminNextUrlRedirectMixin,
+                      ModelAdminFormInstructionsMixin,
                       ModelAdminFormAutoNumberMixin, ModelAdminRevisionMixin,
                       ModelAdminAuditFieldsMixin, ModelAdminReadOnlyMixin,
                       ModelAdminInstitutionMixin):
@@ -39,12 +40,14 @@ class ModelAdminMixin(ModelAdminNextUrlRedirectMixin, ModelAdminFormInstructions
             try:
                 redirect_url = reverse(url_name, kwargs=options)
             except NoReverseMatch as e:
-                raise ModelAdminNextUrlRedirectError(f'{e}. Got url_name={url_name}, kwargs={options}.')
+                raise ModelAdminNextUrlRedirectError(
+                    f'{e}. Got url_name={url_name}, kwargs={options}.')
         return redirect_url
 
 
 @admin.register(SubjectConsent, site=bcpp_clinic_subject_admin)
-class SubjectConsentAdmin(ModelAdminConsentMixin, ModelAdminMixin, admin.ModelAdmin):
+class SubjectConsentAdmin(ModelAdminConsentMixin,
+                          ModelAdminMixin, admin.ModelAdmin):
 
     dashboard_type = 'clinic'
     form = SubjectConsentForm
