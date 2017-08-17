@@ -25,39 +25,31 @@ class DailyLog(BaseUuidModel):
         verbose_name='Number of patients referred from pharmacy')
 
     from_nurse_prescriber = models.IntegerField(
-        verbose_name='Number of patients referred from nurse prescriber',
-    )
+        verbose_name='Number of patients referred from nurse prescriber')
 
     from_ssc = models.IntegerField(
-        verbose_name='Number of patients referred from SSC',
-    )
+        verbose_name='Number of patients referred from SSC')
 
     from_other = models.IntegerField(
-        verbose_name='Number of patients referred from \'other\'',
-    )
+        verbose_name='Number of patients referred from \'other\'')
 
     idcc_scheduled = models.IntegerField(
         verbose_name='Number of patients scheduled/booked for appointments '
-        'in the IDCC',
-    )
+        'in the IDCC')
 
     idcc_newly_registered = models.IntegerField(
-        verbose_name='Number of patients newly registered to the IDCC',
-    )
+        verbose_name='Number of patients newly registered to the IDCC')
 
     idcc_no_shows = models.IntegerField(
         verbose_name='Number of patients who did not show up for '
-        'their appointment.',
-    )
+        'their appointment.')
 
     approached = models.IntegerField(
-        verbose_name='Number of patients approached',
-    )
+        verbose_name='Number of patients approached')
 
     refused = models.IntegerField(
         verbose_name='Number of patients who refused to complete the '
-        'eligibility checklist',
-    )
+        'eligibility checklist')
 
     objects = DailyLogManager()
 
