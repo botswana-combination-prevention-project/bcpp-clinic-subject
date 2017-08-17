@@ -4,6 +4,7 @@ from edc_base.model_managers.historical_records import HistoricalRecords
 from edc_base.model_mixins.base_uuid_model import BaseUuidModel
 from edc_consent.model_mixins import RequiresConsentMixin
 from edc_metadata.model_mixins.creates.creates_metadata_model_mixin import CreatesMetadataModelMixin
+from edc_reference.model_mixins import ReferenceModelMixin
 from edc_visit_tracking.managers import VisitModelManager
 from edc_visit_tracking.model_mixins.visit_model_mixin import VisitModelMixin
 
@@ -13,7 +14,7 @@ from .appointment import Appointment
 
 
 class SubjectVisit(VisitModelMixin, CreatesMetadataModelMixin,
-                   RequiresConsentMixin, BaseUuidModel):
+                   RequiresConsentMixin, ReferenceModelMixin, BaseUuidModel):
 
     """A model completed by the user that captures the covering
     information for the data collected for this timepoint/appointment,

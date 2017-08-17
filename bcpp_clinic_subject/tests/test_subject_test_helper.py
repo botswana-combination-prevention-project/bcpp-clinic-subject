@@ -1,7 +1,7 @@
 from django.test import TestCase
 
 from ..models import SubjectConsent, SubjectVisit, SubjectEligibility
-from .subject_test_helper import SubjecTesttHelper
+from .subject_test_helper import SubjectTestHelper
 
 
 class TestSubjecTestHelper(TestCase):
@@ -9,7 +9,7 @@ class TestSubjecTestHelper(TestCase):
     Subject Consent and Subject Visit.
     """
 
-    subject_helper = SubjecTesttHelper()
+    subject_helper = SubjectTestHelper()
 
     def test_create_subject(self):
         """ Assert creating a consented subject.
