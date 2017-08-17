@@ -12,7 +12,7 @@ from ..models import (
     SubjectEligibility, Appointment, SubjectConsent, SubjectVisit)
 
 
-class SubjecTesttHelper:
+class SubjectTestHelper:
 
     def make_eligibility(self, options=None):
         """Returns subject eligibilty.

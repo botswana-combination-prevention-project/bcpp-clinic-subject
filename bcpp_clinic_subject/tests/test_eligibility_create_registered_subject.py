@@ -2,12 +2,12 @@ from django.test import TestCase
 
 from edc_registration.models import RegisteredSubject
 
-from .subject_test_helper import SubjecTesttHelper
+from .subject_test_helper import SubjectTestHelper
 
 
 class TestEligibilityCreateRegisteredSubject(TestCase):
 
-    subject_test_helper = SubjecTesttHelper()
+    subject_test_helper = SubjectTestHelper()
 
     def test_create_registered_subject(self):
         """Test subject eligibilty creates registered subject.
