@@ -3,7 +3,6 @@ from datetime import datetime
 
 from edc_base.utils import get_utcnow
 from edc_constants.constants import YES, NO
-from edc_visit_tracking.constants import SCHEDULED
 
 from edc_constants.constants import POS, NOT_APPLICABLE, FEMALE
 
@@ -44,5 +43,4 @@ class SubjectTestHelper:
         appointment = Appointment.objects.get(
             subject_identifier=subject_consent.subject_identifier)
         return SubjectVisit.objects.create(
-            report_datetime=timezone.now(), appointment=appointment,
-            reason=SCHEDULED)
+            report_datetime=timezone.now(), appointment=appointment)

@@ -45,11 +45,9 @@ class SubjectVisit(VisitModelMixin, CreatesMetadataModelMixin,
         super(SubjectVisit, self).save(*args, **kwargs)
 
     def __str__(self):
-        return (f'{self.appointment.subject_identifier} '
-                f'{self.appointment.registered_subject.first_name}'
-                f'({self.appointment.registered_subject.gender}) '
-                f'{self.appointment.visit_definition.code}')
+        return (f'{self.subject_identifier} {self.visit_code}')
 
     class Meta(VisitModelMixin.Meta, RequiresConsentMixin.Meta):
         app_label = 'bcpp_clinic_subject'
         consent_model = 'bcpp_clinic_subject.subjectconsent'
+        rulegroup_app_label = 'bcpp_clinic_metadata_rules'

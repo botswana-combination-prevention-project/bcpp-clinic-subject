@@ -2,15 +2,16 @@ from bcpp_community import communities
 from django.utils.translation import ugettext_lazy as _
 from edc_constants.constants import NOT_APPLICABLE, POS, NEG, IND, UNK, DWTA, OTHER
 
-from .constants import ABLE_TO_PARTICIPATE, MENTAL_INCAPACITY
+from .constants import (
+    ABLE_TO_PARTICIPATE, MENTAL_INCAPACITY, INITIATION, MASA_VL_SCHEDULED)
 
 ordered_communities = list(communities.values())
 ordered_communities.sort(key=lambda x: x.code)
 
 REGISTRATION_TYPES = (
-    ('initiation', 'Initiation Visit'),
-    ('masa_vl_scheduled', 'MASA Scheduled Viral Load Visit'),
-    ('OTHER', 'Other NON-Viral Load Visit')
+    (INITIATION, 'Initiation Visit'),
+    (MASA_VL_SCHEDULED, 'MASA Scheduled Viral Load Visit'),
+    (OTHER, 'Other NON-Viral Load Visit')
 )
 
 VISIT_UNSCHEDULED_REASON = (
