@@ -1,4 +1,6 @@
 from django.contrib import admin
+from django.urls.base import reverse
+from django.urls.exceptions import NoReverseMatch
 
 from edc_base.modeladmin_mixins import ModelAdminRedirectOnDeleteMixin
 from edc_base.fieldsets import FieldsetsModelAdminMixin
@@ -37,3 +39,11 @@ class CrfModelAdminMixin(VisitTrackingCrfModelAdminMixin,
         'When all required questions are complete click SAVE. '
         'Based on your responses, additional questions may be '
         'required or some answers may need to be corrected.')
+
+    def view_on_site(self, obj):
+        try:
+            return reverse(
+                'bcpp_clinic_subject:dashboard_url', kwargs=dict(
+                    subject_identifier=obj.subject_identifier))
+        except NoReverseMatch:
+            return super().view_on_site(obj)
