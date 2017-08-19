@@ -1,4 +1,7 @@
 from django.contrib import admin
+from django.urls.base import reverse
+from django.urls.exceptions import NoReverseMatch
+
 from edc_base.fieldsets import FieldsetsModelAdminMixin
 from edc_base.modeladmin_mixins import audit_fieldset_tuple
 

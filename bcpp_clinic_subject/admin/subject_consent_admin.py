@@ -102,11 +102,3 @@ class SubjectConsentAdmin(ModelAdminConsentMixin,
     def get_readonly_fields(self, request, obj=None):
         return (super().get_readonly_fields(request, obj=obj)
                 + audit_fields)
-
-    def view_on_site(self, obj):
-        try:
-            return reverse(
-                'bcpp_clinic_subject:dashboard_url', kwargs=dict(
-                    subject_identifier=obj.subject_identifier))
-        except NoReverseMatch:
-            return super().view_on_site(obj)
