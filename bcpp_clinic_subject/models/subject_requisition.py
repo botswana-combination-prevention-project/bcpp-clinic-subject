@@ -18,3 +18,7 @@ class SubjectRequisition(SubjectRequisitionModelMixin, BaseUuidModel):
         self.protocol_number = django_apps.get_app_config(
             'edc_protocol').protocol_number
         super().save(*args, **kwargs)
+
+    class Meta(SubjectRequisitionModelMixin.Meta):
+        unique_together = [
+            'subject_visit', 'panel_name']
