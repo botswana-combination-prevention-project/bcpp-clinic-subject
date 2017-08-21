@@ -11,7 +11,6 @@ from edc_visit_tracking.model_mixins.visit_model_mixin import VisitModelMixin
 from ..choices import VISIT_UNSCHEDULED_REASON
 from ..constants import RESEARCH_BLOOD_DRAW
 from .appointment import Appointment
-from edc_metadata.rules.site import site_metadata_rules
 
 
 class SubjectVisit(VisitModelMixin, CreatesMetadataModelMixin,
@@ -48,16 +47,6 @@ class SubjectVisit(VisitModelMixin, CreatesMetadataModelMixin,
     def __str__(self):
         return (f'{self.subject_identifier} {self.visit_code}')
 
-    def run_metadata_rules(self):
-        """Runs the rule groups for this .
-
-        Gets called in the signal.
-        """
-        for rule_group in site_metadata_rules.registry.get(self._meta.rulegroup_app_label, []):
-            if rule_group._meta.source_model == self._meta.label_lower:
-                rule_group.evaluate_rules(visit=self)
-
     class Meta(VisitModelMixin.Meta, RequiresConsentMixin.Meta):
         app_label = 'bcpp_clinic_subject'
         consent_model = 'bcpp_clinic_subject.subjectconsent'
-        rulegroup_app_label = 'bcpp_clinic_metadata_rules'
