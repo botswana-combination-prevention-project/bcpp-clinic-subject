@@ -51,6 +51,7 @@ INSTALLED_APPS = [
     'edc_lab.apps.AppConfig',
     'edc_map.apps.AppConfig',
     'edc_sync.apps.AppConfig',
+    'edc_metadata_rules.apps.AppConfig',
     'bcpp_clinic_subject.apps.EdcMetadataAppConfig',
     'bcpp_clinic_subject.apps.BcppCommunityAppConfig',
     'bcpp_clinic_subject.apps.EdcTimepointAppConfig',

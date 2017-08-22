@@ -43,6 +43,11 @@ class SubjectEligibility (UniqueSubjectIdentifierModelMixin,
         unique=True,
         editable=False)
 
+    registration_identifier = models.CharField(
+        max_length=36,
+        null=True,
+        blank=True)
+
     report_datetime = models.DateTimeField(
         verbose_name='Report date',
         default=get_utcnow,
@@ -196,6 +201,7 @@ class SubjectEligibility (UniqueSubjectIdentifierModelMixin,
     def save(self, *args, **kwargs):
         if not self.id:
             self.screening_identifier = ScreeningIdentifier().identifier
+            self.registration_identifier = self.screening_identifier
             self.update_subject_identifier_on_save()
         eligibility = Eligibility(
             age=self.age_in_years, literate=self.literacy,
