@@ -1,4 +1,3 @@
-from django.apps import apps as django_apps
 from django.db.models.signals import post_save
 from django.dispatch import receiver
 
